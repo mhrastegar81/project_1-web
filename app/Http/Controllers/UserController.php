@@ -31,21 +31,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'user_name' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'age' => 'required',
-            'gender' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
-            'address' => 'required',
-            'post_code' => 'required',
-            'country' => 'required',
-            'province' => '',
-            'city' => 'required',
 
-        ]);
+        // $request->validate([
+        //     'user_name' => 'required',
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'age' => 'required',
+        //     'gender' => '',
+        //     'email' => 'required',
+        //     'phone_number' => 'required',
+        //     'address' => 'required',
+        //     'post_code' => 'required',
+        //     'country' => 'required',
+        //     'province' => '',
+        //     'city' => 'required',
+
+        // ]);
 
         DB::table('users')->insert([
             'user_name' => $request->user_name,
@@ -57,7 +58,7 @@ class UserController extends Controller
             'phone_number' => $request->phone_number,
             'password' => md5($request->password),
             'address' => $request->address,
-            'postal_code' => $request->postal_code,
+            'post_code' => $request->postal_code,
             'country'=>$request->country,
             'province' => $request->province,
             'city' => $request->city,

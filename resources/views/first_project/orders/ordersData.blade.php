@@ -7,19 +7,19 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @include('.styleSheets.dataStyle')
-    @include('.styleSheets.styleSheets')
+    @include('first_project.styleSheets.dataStyle')
+    @include('first_project.styleSheets.styleSheets')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
-    @include('.navbar.navbar')
+    @include('first_project.navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('.Sidebar.Sidebar')
+        @include('first_project.Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
 
@@ -27,7 +27,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
 
-        @include('.header.data.ordersData_header')
+        @include('first_project.header.data.ordersData_header')
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -165,7 +165,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @include('.footer.main_footer')
+    @include('first_project.footer.main_footer')
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

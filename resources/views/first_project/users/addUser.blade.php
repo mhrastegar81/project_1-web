@@ -103,8 +103,8 @@
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <label for="postal_code">کد پستی</label>
-                                    <input type="number" class="form-control" id="postal_code" name="postal_code"
+                                    <label for="post_code">کد پستی</label>
+                                    <input type="number" class="form-control" id="post_code" name="post_code"
                                     placeholder="کد پستی را وارد کنید">
                                     @error('postal_code')
                                     <div class="alert alert-danger">{{ $message }}</div>
