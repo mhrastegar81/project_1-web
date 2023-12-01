@@ -31,7 +31,7 @@ class ProductController extends Controller
     {
         // dd($request->all());
         $user = DB::table('products')->insert([
-            'titel' => $request->titel,
+            'product_name' => $request->product_name,
             'price' => $request->price,
             'inventory' => $request->inventory,
             'sold_number' => $request->sold_number,
@@ -65,7 +65,7 @@ class ProductController extends Controller
     {
 
         $product = DB::table('products')->where('id', $id)->update([
-            'titel' => $request->titel,
+            'product_name' => $request->product_name,
             'price' => $request->price,
             'inventory' => $request->inventory,
             'sold_number' => $request->sold_number,
