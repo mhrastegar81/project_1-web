@@ -39,9 +39,9 @@
                         <div class="card-body">
                             <div class="form-group">
 
-                                <label for="titel">نام محصول</label>
-                                <input type="text" class="form-control" id="titel" name="titel"
-                                    value="{{ $product->titel }}">
+                                <label for="product_name">نام محصول</label>
+                                <input type="text" class="form-control" id="product_name" name="product_name"
+                                    value="{{ $product->product_name }}">
                             </div>
                             <div class="form-group">
                                 <label for="price">قیمت</label>
@@ -66,7 +66,7 @@
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">ارسال</button>
                         </div>
-                        
+
                     </form>
                 </div>
             </section>

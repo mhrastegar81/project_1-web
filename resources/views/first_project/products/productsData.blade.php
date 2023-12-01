@@ -60,7 +60,7 @@
                                             @if ($product->status == 'enable')
                                                 <tr>
 
-                                                    <td>{{ $product->titel }}</td>
+                                                    <td>{{ $product->product_name }}</td>
                                                     <td>{{ $product->price }}</td>
                                                     <td>{{ $product->inventory }}</td>
                                                     <td>{{ $product->sold_number }}</td>
