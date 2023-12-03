@@ -37,8 +37,8 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="product_name">نام محصول</label>
-                            <input type="text" class="form-control" id="product_name" name="product_name"
+                            <label for="titel">نام محصول</label>
+                            <input type="text" class="form-control" id="titel" name="titel"
                                    placeholder="نام">
                         </div>
                         <div class="form-group">

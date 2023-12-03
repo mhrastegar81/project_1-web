@@ -93,6 +93,7 @@
                                                     <tbody>
 
                                                         @foreach ($products_available as $product)
+                                                        {{-- {{dd($products_available)}} --}}
                                                             @if ($product->status == 'enable')
                                                                 <tr>
                                                                     <td>{{ $product->titel }}</td>

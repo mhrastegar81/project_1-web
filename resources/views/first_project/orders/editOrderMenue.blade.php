@@ -6,7 +6,7 @@
     <title>پنل مدیریت | کاربر جدید</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @include('styleSheets.styleSheets')
+    @include('first_project.styleSheets.styleSheets')
     <link rel="stylesheet" href="{{asset('persenalCss/app.css')}}">
     <link href="{{asset('bt5.css')}}" rel="stylesheet">
     <script src="{{asset('js/bt5.js')}}"></script>
@@ -15,13 +15,13 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('navbar.navbar')
+    @include('first_project.navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('Sidebar.Sidebar')
+        @include('first_project.Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
     <!-- Content Wrapper. Contains page content -->
@@ -33,35 +33,26 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('save_edited_order',['id'=>$order->id])}}">
+
+                {{-- {{dd($orders)}} --}}
+                <form role="form" method="post" action="{{route('orders.update',['id'=>$order->id])}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="customer_id">customers</label>
-                            <select class="form-control" id="customer_id" name="customer_id">
-                                @foreach($customers as $customer)
-                                    <option value="{{$customer->id}}"
-                                            @if($customer->id == $order->customer->id) selected @endif>
-                                        Email: {{$customer->email}},
-                                        name: {{$customer->last_name}},
-                                        ID : {{$customer->id}},
+                            {{dd($user)}}
+                            <label for="user_id">users</label>
+                            <select class="form-control" id="user_id" name="user_id">
+
+                                    <option value="{{$user->id}}"
+                                            @if($user->id == $order->user_id) selected @endif>
+                                        Email: {{$user->email}},
+                                        name: {{$user->last_name}},
+                                        ID : {{$user->id}},
                                     </option>
-                                @endforeach
+
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="seller_id">sellers</label>
-                            <select class="form-control" id="seller_id" name="seller_id">
-                                @foreach($sellers as $seller)
-                                    <option value="{{$seller->id}}"
-                                            @if($seller->id == $order->seller->id) selected @endif>
-                                        Email: {{$seller->email}}
-                                        name: {{$seller->last_name}},
-                                        ID : {{$seller->id}},
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="product_id">products_available</label>
@@ -92,9 +83,9 @@
                                                     @endphp--}}
                                                     @foreach($products as $product)
                                                         <tr>
-                                                            <td>{{$product->product_name}}</td>
+                                                            <td>{{$product->titel}}</td>
                                                             <td>{{$product->price}}</td>
-                                                            <td>{{$product->amount_available}}</td>
+                                                            <td>{{$product->inventory}}</td>
                                                             <td>
                                                                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                                                                     <button class="btn btn-link px-2" type="button"
@@ -104,15 +95,15 @@
                                                                     <input min="0" name="Product_{{$product->id}}"
                                                                            placeholder="0"
                                                                            @php($temp = 0)
-                                                                           @foreach($order->products as $orderProduct)
-                                                                               @if($orderProduct->id == $product->id)
-                                                                                   value="{{$orderProduct->pivot->count}}"
-                                                                           @php($temp += $orderProduct->pivot->count)
+                                                                           @foreach($products as $Product)
+                                                                               @if($product->id == $product->id)
+                                                                                   value="{{$Product->inventory}}"
+                                                                           @php($temp += $Product->inventory)
                                                                            @break
                                                                            @endif
                                                                            @endforeach
                                                                            type="number"
-                                                                           max="{{$product->amount_available+$temp}}"
+                                                                           max="{{$product->inventory+$temp}}"
                                                                            class="form-control form-control-sm"
                                                                            style="width: 70px;"/>
                                                                     <button class="btn btn-link px-2" type="button"
@@ -175,7 +166,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-@include('.footer.main_footer')
+@include('first_project.footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -184,7 +175,7 @@
 <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('.scripts')
+@include('first_project.scripts')
 </body>
 
 </html>
