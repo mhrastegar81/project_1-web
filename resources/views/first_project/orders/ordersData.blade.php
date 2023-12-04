@@ -92,52 +92,68 @@
                                                                 data-bs-parent="#accordion">
                                                                 <div class="card-body">
                                                                     <table>
+
+
                                                                         @foreach ($products as $product)
-                                                                            @php($user_product_count = 0)
-                                                                            @foreach ($products_count as $product_count)
-                                                                                @if ($order->id == $product_count->order_id && $product_count->product_id == $product->id)
-                                                                                    @php($user_product_count += 1)
+
+                                                                            @if ($product->status == 'enable')
+                                                                                @foreach ($order_products as $order_product)
+                                                                                    @if ($order->id == $order_product->order_id)
+                                                                                        @if ($product->id == $order_product->product_id)
+                                                                                            {{ $count = $order_product->count }}
+
+
+                                                                                            <tr>
+                                                                                                <td>name :
+                                                                                                    {{ $product->titel }}
+                                                                                                </td>
+                                                                                                <td>price :
+                                                                                                    {{ $product->price }}
+                                                                                                </td>
+                                                                                                <td>count :
+                                                                                                    {{ $count }}
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        @break
+                                                                                    @endif
                                                                                 @endif
                                                                             @endforeach
-                                                                            <tr>
-                                                                                <td>name : {{ $product->titel }}</td>
-                                                                                <td>price : {{ $product->price }}</td>
-                                                                                <td>count : {{ $user_product_count }}
-                                                                                </td>
-                                                                            </tr>
-                                                                        @endforeach
-                                                                    </table>
-                                                                </div>
+                                                                        @endif
+                                                                        ًًًًًًًًًًًًًًًًًًًًًًً
+                                                                    @endforeach
+
+                                                                </table>
                                                             </div>
-                                                        </td>
-                                                        <td>{{ $order->total_price }}</td>
-                                                        {{-- <td>{{ $order->balance }}</td> --}}
-                                                        <td>
-                                                            <form class=""
-                                                                action="{{ route('orders.edit', ['id' => $order->id]) }}"
-                                                                method="get">
-                                                                <button type="submit">
-                                                                    <i
-                                                                        class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
-                                                        <td>
-                                                            <form class=""
-                                                                action="{{ route('orders.destroy', ['id' => $order->id]) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    onclick="return confirm('Are you sure?')">
-                                                                    <i class="fa-regular fa-trash-can"></i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
-                                        </tbody>
-                                        {{-- <tfoot>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $order->total_price }}</td>
+                                                    {{-- <td>{{ $order->balance }}</td> --}}
+                                                    <td>
+                                                        <form class=""
+                                                            action="{{ route('orders.edit', ['id' => $order->id]) }}"
+                                                            method="get">
+                                                            <button type="submit">
+                                                                <i
+                                                                    class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form class=""
+                                                            action="{{ route('orders.destroy', ['id' => $order->id]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <button type="submit"
+                                                                onclick="return confirm('Are you sure?')">
+                                                                <i class="fa-regular fa-trash-can"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                    {{-- <tfoot>
                                     <tr>
                                         <th>مشتری</th>
                                         <th>فروشنده</th>
@@ -149,66 +165,66 @@
                                         <th>حذف</th>
                                     </tr>
                                     </tfoot> --}}
-                                    </table>
-                                </div>
+                                </table>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.col -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.row -->
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-        @include('first_project.footer.main_footer')
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery -->
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- DataTables -->
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
-    <!-- SlimScroll -->
-    <script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
-    <!-- FastClick -->
-    <script src="{{ asset('plugins/fastclick/fastclick.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('dist/js/demo.js') }}"></script>
-    <!-- page script -->
+    <!-- /.content-wrapper -->
+    @include('first_project.footer.main_footer')
 
-    <script>
-        $(function() {
-            $('#Data').DataTable({
-                "language": {
-                    "paginate": {
-                        "next": "بعدی",
-                        "previous": "قبلی"
-                    },
-                    "search": "جست و جو : ",
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- jQuery -->
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
+<!-- SlimScroll -->
+<script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('plugins/fastclick/fastclick.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('dist/js/demo.js') }}"></script>
+<!-- page script -->
+
+<script>
+    $(function() {
+        $('#Data').DataTable({
+            "language": {
+                "paginate": {
+                    "next": "بعدی",
+                    "previous": "قبلی"
                 },
+                "search": "جست و جو : ",
+            },
 
-                "info": true,
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "autoWidth": true
-            });
+            "info": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "autoWidth": true
         });
-    </script>
+    });
+</script>
 
 </body>
 
