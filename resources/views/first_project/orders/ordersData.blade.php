@@ -119,7 +119,7 @@
                                                                                 @endif
                                                                             @endforeach
                                                                         @endif
-                                                                        ًًًًًًًًًًًًًًًًًًًًًًً
+                                                                        
                                                                     @endforeach
 
                                                                 </table>

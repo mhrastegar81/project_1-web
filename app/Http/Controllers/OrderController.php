@@ -136,10 +136,7 @@ class OrderController extends Controller
     {
         //گام اول : محسابه قیمت نهایی
         $total_price = 0;
-        $products_id = [];
 
-
-        $titel = DB::table('orders')->where('id', $id)->first()->titel;
         $order_products = DB::table('order_products')->get();
 
         foreach ($request->all() as $key => $product_count) {
@@ -148,21 +145,37 @@ class OrderController extends Controller
             if (Str::is('Product*', $key)) {
 
                 $product_id = substr($key, -1);
-                $products = DB::table('products')->where('id', $product_id)->first();
-                $total_price += $products->price * $product_count;
-                //پایان عملیات گام اول
                 $order_products = DB::table('order_products')->where('order_id', $id)->get();
+                
                 foreach ($order_products as $order_product) {
-                    DB::table('order_products')->where('product_id', $order_product->product_id)->update([
-                        'count' => $product_count,
-                    ]);
-                    $product_inventory = ($products->inventory - $product_count);
-                    $product_sold_number = ($products->sold_number + $product_count);
+                    if ($order_product->product_id == $product_id) {
+                        if ($order_product->count != $product_count) {
 
-                    DB::table('products')->where('id', $product_id)->update([
-                        'inventory' => $product_inventory,
-                        'sold_number' => $product_sold_number,
-                    ]);
+                            $products = DB::table('products')->where('id', $product_id)->first();
+                            $total_price += $products->price * $product_count;
+                            //پایان عملیات گام اول
+
+
+                            DB::table('order_products')->where('product_id', $order_product->product_id)->update([
+                                'count' => $product_count,
+                            ]);
+
+                            $product_inventory = ($products->inventory - $product_count);
+                            $product_sold_number = ($products->sold_number + $product_count);
+
+                            DB::table('products')->where('id', $product_id)->update([
+                                'inventory' => $product_inventory,
+                                'sold_number' => $product_sold_number,
+                            ]);
+                            break;
+
+                        }else{
+                            $products = DB::table('products')->where('id', $product_id)->first();
+                            $total_price += $products->price * $product_count;
+                        }
+
+                    }
+
                 }
 
 
@@ -176,9 +189,8 @@ class OrderController extends Controller
 
         DB::table('orders')->where('id', $id)->update([
             'user_id' => $request->user_id,
-            'titel' => $titel,
             'total_price' => $total_price,
-            'created_at' => date('Y-m-d H:i:s'),
+            'update_at' => date('Y-m-d H:i:s'),
 
         ]);
 

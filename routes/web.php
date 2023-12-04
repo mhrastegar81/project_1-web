@@ -25,7 +25,7 @@ Route::get('/users/create', [UserController::class, 'create'])->name('users.addU
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::any('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
-Route::post('/users/{id}/delet', [UserController::class, 'destroy'])->name('users.destroy');
+Route::post('/users/{id}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
 
 
 //products
@@ -41,5 +41,5 @@ Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
-Route::patch('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
+Route::any('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
 Route::post('/orders/{id}/destroy', [OrderController::class, 'destroy'])->name('orders.destroy');
