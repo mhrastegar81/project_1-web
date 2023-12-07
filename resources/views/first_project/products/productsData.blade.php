@@ -45,9 +45,7 @@
                                         <tr>
                                             <th>id</th>
                                             <th>نام کالا</th>
-                                            <th>توضیحات</th>
                                             <th>قیمت</th>
-                                            <th>سفارشات</th>
                                             <th>موجودی</th>
                                             <th>ویرایش</th>
                                             <th>حذف</th>
@@ -59,13 +57,12 @@
                                             {{-- {{dd($products)}} --}}
                                             @if ($product->status == 'enable')
                                                 <tr>
-
-                                                    <td>{{ $product->titel }}</td>
+                                                    <td>{{ $product->id }}</td>
+                                                    <td>{{ $product->title }}</td>
                                                     <td>{{ $product->price }}</td>
                                                     <td>{{ $product->inventory }}</td>
-                                                    <td>{{ $product->sold_number }}</td>
-                                                    <td>{{ $product->description }}</td>
-                                                    <td>
+
+
 
                                                     <td>
                                                         <form
@@ -94,9 +91,7 @@
                                         <tr>
                                             <th>id</th>
                                             <th>نام کالا</th>
-                                            <th>توضیحات</th>
                                             <th>قیمت</th>
-                                            <th>سفارشات</th>
                                             <th>موجودی</th>
                                             <th>ویرایش</th>
                                             <th>حذف</th>

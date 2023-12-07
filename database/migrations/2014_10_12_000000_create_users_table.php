@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('user_name', 255)->nullable()->collation('utf8mb4_general_ci')->unique();
             $table->string('first_name', 255)->nullable()->collation('utf8mb4_general_ci');
             $table->string('last_name',255)->nullable()->collation('utf8mb4_general_ci');
-            $table->integer('age')->nullable()->unsigned();
+            $table->string('age',255)->nullable();
             $table->enum('gender',['male', 'female'])->nullable();
             $table->string('email',255)->nullable()->collation('utf8mb4_general_ci')->unique();
-            $table->bigInteger('phone_number')->nullable()->unsigned()->unique();
+            $table->string('phone_number',255)->nullable()->unique();
             $table->string('password', 255)->nullable()->collation('utf8mb4_general_ci');
             $table->string('address', 255)->nullable()->collation('utf8mb4_general_ci');
-            $table->bigInteger('post_code')->nullable()->unsigned();
+            $table->string('post_code',255)->nullable();
             $table->string('country', 255)->nullable()->collation('utf8mb4_general_ci');
             $table->string('province', 255)->nullable()->collation('utf8mb4_general_ci');
             $table->string('city', 255)->nullable()->collation('utf8mb4_general_ci');

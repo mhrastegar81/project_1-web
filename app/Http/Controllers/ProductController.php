@@ -30,14 +30,15 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $user = DB::table('products')->insert([
-            'titel' => $request->titel,
+        $products = DB::table('products')->insert([
+            'title' => $request->title,
             'price' => $request->price,
             'inventory' => $request->inventory,
             'sold_number' => $request->sold_number,
-            'description' => $request->description,
+            'discription' => $request->discription,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
+        return redirect('/products');
     }
 
     /**
@@ -65,11 +66,11 @@ class ProductController extends Controller
     {
 
         $product = DB::table('products')->where('id', $id)->update([
-            'titel' => $request->titel,
+            'title' => $request->title,
             'price' => $request->price,
             'inventory' => $request->inventory,
             'sold_number' => $request->sold_number,
-            'description' => $request->description,
+            'discription' => $request->discription,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
         return redirect('/products');

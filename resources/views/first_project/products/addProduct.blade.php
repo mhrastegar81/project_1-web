@@ -37,8 +37,8 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="titel">نام محصول</label>
-                            <input type="text" class="form-control" id="titel" name="titel"
+                            <label for="title">نام محصول</label>
+                            <input type="text" class="form-control" id="title" name="title"
                                    placeholder="نام">
                         </div>
                         <div class="form-group">
@@ -47,18 +47,18 @@
                                    placeholder="قیمت">
                         </div>
                         <div class="form-group">
-                            <label for="amount_available">موجودی</label>
-                            <input type="number" class="form-control" id="amount_available" name="amount_available"
+                            <label for="inventory">موجودی</label>
+                            <input type="number" class="form-control" id="inventory" name="inventory"
                                    placeholder="موجودی">
                         </div>
                         <div class="form-group">
-                            <label for="amount_sold">فروش رقته</label>
-                            <input type="number" class="form-control" id="amount_sold" name="amount_sold"
+                            <label for="sold_number">فروش رقته</label>
+                            <input type="number" class="form-control" id="sold_number" name="sold_number"
                                    placeholder="فروش رقته">
                         </div>
                         <div class="form-group">
-                            <label for="explanation">توضیحات</label>
-                            <textarea class="form-control" rows="4" id="explanation" name="explanation"
+                            <label for="discription">توضیحات</label>
+                            <textarea class="form-control" rows="4" id="discription" name="discription"
                                       placeholder="لطفا توضیحات مربوطه را وارد کنید"></textarea>
                         </div>
                     </div>

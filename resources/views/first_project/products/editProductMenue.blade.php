@@ -39,9 +39,9 @@
                         <div class="card-body">
                             <div class="form-group">
 
-                                <label for="titel">نام محصول</label>
-                                <input type="text" class="form-control" id="titel" name="titel"
-                                    value="{{ $product->titel }}">
+                                <label for="title">نام محصول</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                    value="{{ $product->title }}">
                             </div>
                             <div class="form-group">
                                 <label for="price">قیمت</label>
@@ -59,8 +59,8 @@
                                     value="{{ $product->sold_number }}">
                             </div>
                             <div class="form-group">
-                                <label for="description">توضیحات</label>
-                                <textarea class="form-control" rows="4" id="description" name="description">{{ $product->description }}</textarea>
+                                <label for="discription">توضیحات</label>
+                                <textarea class="form-control" rows="4" id="discription" name="discription">{{ $product->discription }}</textarea>
                             </div>
                         </div>
                         <div class="card-footer">
