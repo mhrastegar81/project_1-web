@@ -47,11 +47,8 @@
                                                 <th>ID</th>
                                                 <th>اسم سفارش</th>
                                                 <th>مشتری</th>
-
-                                                <th>توضیحات</th>
                                                 <th>لیست محصولات</th>
                                                 <th>قیمت کل</th>
-
                                                 <th>ویرایش</th>
                                                 <th>حذف</th>
                                             </tr>
@@ -59,98 +56,93 @@
                                         <tbody>
                                             @php($temp = 0)
                                             @foreach ($orders as $order)
-                                                @if ($order->status == 'enable')
-                                                    <tr>
-                                                        <td>{{ $order->id }}</td>
-                                                        <td>{{ $order->titel }}</td>
-                                                        <td>
-                                                            <a class="btn" data-bs-toggle="collapse"
-                                                                href="#collapseC{{ $order->user_id }}{{ $temp }}">
-                                                                {{ $order->user_id }}
-                                                            </a>
-                                                            <div id="collapseC{{ $order->user_id }}{{ $temp++ }}"
-                                                                class="collapse" data-bs-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <th>{{ $order->user_name }}
-                                                                                {{ $order->last_name }}</th>
-                                                                            <th>{{ $order->email }}</th>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>{{ $order->discription }}</td>
-                                                        <td>
-                                                            <a class="btn" data-bs-toggle="collapse"
-                                                                href="#collapseP{{ $order->id }}">
-                                                                All products
-                                                            </a>
-                                                            <div id="collapseP{{ $order->id }}" class="collapse"
-                                                                data-bs-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    <table>
-
-
-                                                                        @foreach ($products as $product)
-
-                                                                            @if ($product->status == 'enable')
-                                                                                @foreach ($order_products as $order_product)
-                                                                                    @if ($order->id == $order_product->order_id)
-                                                                                        @if ($product->id == $order_product->product_id)
-                                                                                            {{ $count = $order_product->count }}
-
-
-                                                                                            <tr>
-                                                                                                <td>name :
-                                                                                                    {{ $product->titel }}
-                                                                                                </td>
-                                                                                                <td>price :
-                                                                                                    {{ $product->price }}
-                                                                                                </td>
-                                                                                                <td>count :
-                                                                                                    {{ $count }}
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        @break
-                                                                                    @endif
-                                                                                @endif
-                                                                            @endforeach
-                                                                        @endif
-                                                                        
-                                                                    @endforeach
-
+                                                <tr>
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->title }}</td>
+                                                    <td>
+                                                        <a class="btn" data-bs-toggle="collapse"
+                                                            href="#collapseC{{ $order->user_id }}{{ $temp }}">
+                                                            {{ $order->user_id }}
+                                                        </a>
+                                                        <div id="collapseC{{ $order->user_id }}{{ $temp++ }}"
+                                                            class="collapse" data-bs-parent="#accordion">
+                                                            <div class="card-body">
+                                                                <table>
+                                                                    <tr>
+                                                                        <th>{{ $order->user_name }}
+                                                                            {{ $order->last_name }}</th>
+                                                                        <th>{{ $order->email }}</th>
+                                                                    </tr>
                                                                 </table>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>{{ $order->total_price }}</td>
-                                                    {{-- <td>{{ $order->balance }}</td> --}}
+
+
                                                     <td>
-                                                        <form class=""
-                                                            action="{{ route('orders.edit', ['id' => $order->id]) }}"
-                                                            method="get">
-                                                            <button type="submit">
-                                                                <i
-                                                                    class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <form class=""
-                                                            action="{{ route('orders.destroy', ['id' => $order->id]) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            <button type="submit"
-                                                                onclick="return confirm('Are you sure?')">
-                                                                <i class="fa-regular fa-trash-can"></i>
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                                        <a class="btn" data-bs-toggle="collapse"
+                                                            href="#collapseP{{ $order->id }}">
+                                                            All products
+                                                        </a>
+                                                        <div id="collapseP{{ $order->id }}" class="collapse"
+                                                            data-bs-parent="#accordion">
+                                                            <div class="card-body">
+                                                                <table>
+
+
+                                                                    @foreach ($products as $product)
+                                                                        @foreach ($order_products as $order_product)
+                                                                            @if ($order->id == $order_product->order_id)
+                                                                                @if ($product->id == $order_product->product_id)
+                                                                                    {{ $count = $order_product->count }}
+
+
+                                                                                    <tr>
+                                                                                        <td>name :
+                                                                                            {{ $product->title }}
+                                                                                        </td>
+                                                                                        <td>price :
+                                                                                            {{ $product->price }}
+                                                                                        </td>
+                                                                                        <td>count :
+                                                                                            {{ $count }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                @break
+                                                                            @endif
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endforeach
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $order->total_price }}</td>
+                                                {{-- <td>{{ $order->balance }}</td> --}}
+                                                <td>
+                                                    <form class=""
+                                                        action="{{ route('orders.edit', ['id' => $order->id]) }}"
+                                                        method="get">
+                                                        <button type="submit">
+                                                            <i
+                                                                class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form class=""
+                                                        action="{{ route('orders.destroy', ['id' => $order->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            onclick="return confirm('Are you sure?')">
+                                                            <i class="fa-regular fa-trash-can"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        
                                         @endforeach
                                     </tbody>
                                     {{-- <tfoot>

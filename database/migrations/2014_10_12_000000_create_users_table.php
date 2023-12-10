@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('city', 255)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->softDeletes('deleted_at');
         });
     }
 

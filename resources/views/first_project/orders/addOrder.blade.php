@@ -41,8 +41,8 @@
                         @csrf
                         <div class="form-group">
                             <div class="col">
-                                <label for="titel">اسم سفارش</label>
-                                <input type="text" class="form-control" id="titel" name="titel"
+                                <label for="title">اسم سفارش</label>
+                                <input type="text" class="form-control" id="title" name="title"
                                     placeholder="اسم سفارش">
                             </div>
                             <label for="user_id">customers</label>
@@ -92,11 +92,11 @@
                                                     </thead>
                                                     <tbody>
 
-                                                        @foreach ($products_available as $product)
+                                                        @foreach ($products as $product)
                                                         {{-- {{dd($products_available)}} --}}
-                                                            @if ($product->status == 'enable')
+
                                                                 <tr>
-                                                                    <td>{{ $product->titel }}</td>
+                                                                    <td>{{ $product->title }}</td>
                                                                     <td>{{ $product->price }}</td>
                                                                     <td>{{ $product->inventory }}</td>
                                                                     <td>
@@ -120,7 +120,7 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                            @endif
+
                                                         @endforeach
                                                     </tbody>
                                                 </table>

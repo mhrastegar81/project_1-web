@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->string('title',255)->collation('utf8mb4_general_ci');
+            $table->bigIncrements('id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->index();
+            $table->string('title',255);
             $table->bigInteger('total_price')->unsigned();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
-            $table->enum('status',['enable', 'disable'])->default('enable');
+            $table->timestamps();
+            $table->softDeletes('deleted_at');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

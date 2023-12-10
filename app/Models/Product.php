@@ -9,7 +9,11 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    
+
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+
+    public function orders(){
+        return $this->belongsToMany('App\Models\Order');
+    }
 }

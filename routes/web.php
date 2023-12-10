@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\modell_bindingController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -43,3 +44,6 @@ Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
 Route::any('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
 Route::post('/orders/{id}/destroy', [OrderController::class, 'destroy'])->name('orders.destroy');
+
+
+Route::get('/user-show/{user}',[modell_bindingController::class , 'index']);

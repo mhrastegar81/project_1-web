@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('sold_number')->unsigned()->nullable();
             $table->text('discription')->nullable();
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->softDeletes('deleted_at');
         });
     }
 
