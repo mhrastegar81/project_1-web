@@ -123,8 +123,8 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <label for="Province">استان</label>
-                                    <input type="text" class="form-control" id="Province" name="Province"
+                                    <label for="province">استان</label>
+                                    <input type="text" class="form-control" id="province" name="province"
                                         placeholder="نام استان را وارد کنید">
                                     @error('province')
                                         <div class="alert alert-danger">{{ $message }}</div>

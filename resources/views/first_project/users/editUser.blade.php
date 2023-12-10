@@ -88,6 +88,24 @@
                                    placeholder="{{$user->address}}" value="{{$user->address}}">
                         </div>
 
+                        <div class="form-group">
+                            <label for="country">کشور</label>
+                            <input type="text" class="form-control" id="country" name="country"
+                                   placeholder="{{$user->country}}" value="{{$user->country}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="province">استان</label>
+                            <input type="text" class="form-control" id="province" name="province"
+                                   placeholder="{{$user->province}}" value="{{$user->province}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">شهر</label>
+                            <input type="text" class="form-control" id="city" name="city"
+                                   placeholder="{{$user->city}}" value="{{$user->city}}">
+                        </div>
+
                     </div>
                     <!-- /.card-body -->
 
