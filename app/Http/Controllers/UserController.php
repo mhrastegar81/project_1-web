@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,8 @@ class UserController extends Controller
     public function index(): View
     {
         //return view('first_project.users.usersData');
-        $users = DB::table('users')->get();
+        $users = User::all();
+
         return view('first_project.users.usersData', ['users' => $users]);
     }
 
@@ -47,8 +49,7 @@ class UserController extends Controller
         //     'city' => 'required',
 
         // ]);
-
-        DB::table('users')->insert([
+        $post = User::create([
             'user_name' => $request->user_name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -58,12 +59,13 @@ class UserController extends Controller
             'phone_number' => $request->phone_number,
             'password' => md5($request->password),
             'address' => $request->address,
-            'post_code' => $request->postal_code,
-            'country'=>$request->country,
+            'post_code' => $request->post_code,
+            'country' => $request->country,
             'province' => $request->province,
             'city' => $request->city,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
+
         return redirect('/users');
     }
 
@@ -83,8 +85,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         //DB::insert('insert into users (user_name,first_name,last_name,email,phone_number) values (?,?,?,?,?)', ['shark','taha','samad','amirreza@gmail.com']);
-        $user = DB::table('users')->where('id', $id)->first();
-
+        $user = User::where('id', $id)->get->first();
         return view('first_project.users.editUser', ['user' => $user]);
     }
 
@@ -93,7 +94,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('users')->where('id', $id)->update([
+       User::where('id', $id)->update([
             'user_name' => $request->user_name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -109,8 +110,7 @@ class UserController extends Controller
             'city' => $request->city,
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
-        return redirect ('/users');
-
+        return redirect('/users');
     }
 
     /**
@@ -118,7 +118,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = DB::table('users')->where('id', $id)->update(['status' => 'disable']);
+        $user = User::where('id', $id)->delete();
         return redirect('/users');
     }
 }
