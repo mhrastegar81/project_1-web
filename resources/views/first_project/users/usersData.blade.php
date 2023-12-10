@@ -355,7 +355,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($users as $user)
-                                            @if ( $user->status == 'enable'){
+
                                             <tr>
                                                 {{-- <th>{{ $user->role->role_name }}</th> --}}
 
@@ -397,8 +397,7 @@
                                                 </td>
 
                                             </tr>
-                                        }
-                                        @endif
+
                                         @endforeach
                                     </tbody>
                                 </table>
