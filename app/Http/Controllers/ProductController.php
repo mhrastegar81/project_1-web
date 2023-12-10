@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = DB::table('products')->get();
+        $products = Product::all();
         return view('first_project.products.productsData', ['products' => $products]);
     }
 
@@ -30,7 +31,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $products = DB::table('products')->insert([
+        $products = Product::create([
             'title' => $request->title,
             'price' => $request->price,
             'inventory' => $request->inventory,
@@ -54,7 +55,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = DB::table('products')->where('id',$id)->first();
+        $product = Product::where('id',$id)->get()->first();
 
         return view('first_project.products.editProductMenue',['product'=> $product]);
     }
@@ -65,7 +66,7 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $product = DB::table('products')->where('id', $id)->update([
+        $product = Product::where('id', $id)->update([
             'title' => $request->title,
             'price' => $request->price,
             'inventory' => $request->inventory,
@@ -82,7 +83,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
 
-        $product = DB::table('products')->where('id', $id)->update(['status' => 'disable']);
+        $product = Product::where('id', $id)->delete();
         return redirect('/products');
     }
 }

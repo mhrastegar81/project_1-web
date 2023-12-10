@@ -54,37 +54,35 @@
                                     <tbody>
                                         @php($temp = 0)
                                         @foreach ($products as $product)
-                                            {{-- {{dd($products)}} --}}
-                                            @if ($product->status == 'enable')
-                                                <tr>
-                                                    <td>{{ $product->id }}</td>
-                                                    <td>{{ $product->title }}</td>
-                                                    <td>{{ $product->price }}</td>
-                                                    <td>{{ $product->inventory }}</td>
+                                            
+
+                                            <tr>
+                                                <td>{{ $product->id }}</td>
+                                                <td>{{ $product->title }}</td>
+                                                <td>{{ $product->price }}</td>
+                                                <td>{{ $product->inventory }}</td>
 
 
 
-                                                    <td>
-                                                        <form
-                                                            action="{{ route('products.edit', ['id' => $product->id]) }}"
-                                                            method="get">
-                                                            <button type="submit"><i
-                                                                    class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <form
-                                                            action="{{ route('products.destroy', ['id' => $product->id]) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            <button type="submit"
-                                                                onclick="return confirm('Are you sure?')"><i
-                                                                    class="fa-regular fa-trash-can"></i></button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                                <td>
+                                                    <form action="{{ route('products.edit', ['id' => $product->id]) }}"
+                                                        method="get">
+                                                        <button type="submit"><i
+                                                                class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form
+                                                        action="{{ route('products.destroy', ['id' => $product->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            onclick="return confirm('Are you sure?')"><i
+                                                                class="fa-regular fa-trash-can"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
