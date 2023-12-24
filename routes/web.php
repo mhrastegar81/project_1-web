@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FactorController;
 use App\Http\Controllers\modell_bindingController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -45,5 +46,10 @@ Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.
 Route::any('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
 Route::post('/orders/{id}/destroy', [OrderController::class, 'destroy'])->name('orders.destroy');
 
-
-Route::get('/user-show/{user}',[modell_bindingController::class , 'index']);
+//Factor
+Route::get('/Factor', [FactorController::class, 'index'])->name('Factor.index');
+Route::get('/Factor/create', [FactorController::class, 'create'])->name('Factor.create');
+Route::post('/Factor', [FactorController::class, 'store'])->name('Factor.store');
+Route::get('/Factor/{id}/edit', [FactorController::class, 'edit'])->name('Factor.edit');
+Route::any('/Factor/{id}', [FactorController::class, 'update'])->name('Factor.update');
+Route::post('/Factor/{id}/destroy', [FactorController::class, 'destroy'])->name('Factor.destroy');

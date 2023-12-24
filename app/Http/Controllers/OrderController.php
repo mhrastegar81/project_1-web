@@ -50,7 +50,6 @@ class OrderController extends Controller
     {
         //گام اول : محسابه قیمت نهایی
         $total_price = 0;
-
         Order::create([
             'user_id' => $request->user_id,
             'title' => $request->title,
