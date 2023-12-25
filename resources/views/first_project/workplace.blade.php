@@ -610,7 +610,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-    @include('footer.main_footer')
+    @include('first_project.footer.main_footer')
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -619,7 +619,7 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('scripts')
+@include('first_project.scripts')
 </body>
 
 </html>

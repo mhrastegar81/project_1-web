@@ -40,7 +40,7 @@
                                 <div class="col">
                                     <label for="email">ایمیل</label>
                                     <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="ایمیل را وارد کنید">
+                                    value="{{$user->email}}">
                                     @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -48,7 +48,7 @@
                                 <div class="col">
                                     <label for="first_name">نام</label>
                                     <input type="text" class="form-control" id="first_name" name="first_name"
-                                    placeholder="نام">
+                                    value="{{$user->first_name}}">
                                     @error('first_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror

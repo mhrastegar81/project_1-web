@@ -6,20 +6,20 @@
     <title>پنل مدیریت | داشبورد اول</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @include('styleSheets.styleSheets')
+    @include('first_project.styleSheets.styleSheets')
     <link rel="stylesheet" href="{{asset('persenalCss/app.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('navbar.navbar')
+    @include('first_project.navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('Sidebar.Sidebar')
+        @include('first_project.Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
 
@@ -27,7 +27,7 @@
     <div class="content-wrapper">
 
         <!-- Content Header (Page header) -->
-        @include('header.adding.addCheck_header')
+        @include('first_project.header.adding.addCheck_header')
         <!-- /.content-header -->
         <!-- Main row -->
         <section class="content">
@@ -36,7 +36,7 @@
 
 
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('store_edited_check',['id' => $check->id]) }}">
+                <form role="form" method="post" action="{{route('Factor.update',['id' => $check->id]) }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <label for="total_pay">مبلغ فاکتور</label>
                                 <input type="number" class="form-control" id="total_pay" name="total_pay"
-                                       placeholder="{{$check->total_pay}}" value="{{$check->total_pay}}">
+                                       placeholder="{{$check->order->total_price}}" value="{{$check->order->total_price}}}">
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
 
 <!-- /.content-wrapper -->
 
-@include('.footer.main_footer')
+@include('first_project.footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -77,7 +77,7 @@
 <!-- /.control-sidebar -->
 
 <!-- ./wrapper -->
-@include('.scripts')
+@include('first_project.scripts')
 </body>
 
 </html>

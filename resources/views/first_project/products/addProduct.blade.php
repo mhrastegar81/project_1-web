@@ -37,6 +37,23 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
+
+                            
+
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="seller">فروشنده</label>
+                                    <select name="seller" class="form-control">
+                                            <option value="{{ $user->id }}">
+                                                {{ $user->name }}
+                                            </option>
+                                    </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="title">نام محصول</label>
                             <input type="text" class="form-control" id="title" name="title"
                                    placeholder="نام">

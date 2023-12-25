@@ -47,12 +47,12 @@
                             </div>
                             <label for="user_id">customers</label>
                             <select class="form-control" id="user_id" name="user_id">
-                                @foreach ($users as $user)
+
                                     <option value="{{ $user->id }}">
                                         name: {{ $user->last_name }},
                                         Email: {{ $user->email }}
                                     </option>
-                                @endforeach
+
                             </select>
                         </div>
                         {{-- <div class="form-group">

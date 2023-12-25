@@ -21,19 +21,29 @@
             <form action="{{route('register')}}" method="post">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="نام و نام خانوادگی">
+                    <input type="text" class="form-control" placeholder="نام" name="first_name">
                     <div class="input-group-append">
                         <span class="fa fa-user input-group-text"></span>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="ایمیل">
+                    <select class="form-control" placeholder="نقش" name="role">
+                        <option value="seller">فروشنده</option>
+                        <option value="buyer">خریدار</option>
+                    </select>
+                    <div class="input-group-append">
+                        <span class="fa fa-user input-group-text"></span>
+                    </div>
+
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="ایمیل" name="email">
                     <div class="input-group-append">
                         <span class="fa fa-envelope input-group-text"></span>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="رمز عبور">
+                    <input type="password" class="form-control" placeholder="رمز عبور" name="password">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="fa-solid fa-fingerprint"></i>
@@ -41,7 +51,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="تکرار رمز عبور">
+                    <input type="password" class="form-control" placeholder="تکرار رمز عبور"name="password_confirmation">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="fa-solid fa-lock"></i>

@@ -57,21 +57,22 @@
                                             @php($temp = 0)
                                             @foreach ($orders as $order)
                                                 <tr>
+
                                                     <td>{{ $order->id }}</td>
                                                     <td>{{ $order->title }}</td>
                                                     <td>
                                                         <a class="btn" data-bs-toggle="collapse"
-                                                            href="#collapseC{{ $order->user_id }}{{ $temp }}">
-                                                            {{ $order->user_id }}
+                                                            href="#collapseC{{ $order->user->id }}{{ $temp }}">
+                                                            {{ $order->user->id }}
                                                         </a>
-                                                        <div id="collapseC{{ $order->user_id }}{{ $temp++ }}"
+                                                        <div id="collapseC{{ $order->user->id }}{{ $temp++ }}"
                                                             class="collapse" data-bs-parent="#accordion">
                                                             <div class="card-body">
                                                                 <table>
                                                                     <tr>
-                                                                        <th>{{ $order->user_name }}
-                                                                            {{ $order->last_name }}</th>
-                                                                        <th>{{ $order->email }}</th>
+                                                                        <th>{{ $order->user->name }}
+                                                                            {{ $order->user->last_name }}</th>
+                                                                        <th>{{ $order->user->email }}</th>
                                                                     </tr>
                                                                 </table>
                                                             </div>
@@ -91,10 +92,10 @@
 
 
                                                                     @foreach ($products as $product)
-                                                                        @foreach ($order_products as $order_product)
-                                                                            @if ($order->id == $order_product->order_id)
-                                                                                @if ($product->id == $order_product->product_id)
-                                                                                    {{ $count = $order_product->count }}
+                                                                        @foreach ($order->products as $order_product)
+                                                                            @if ($order->id == $order_product->pivot->order_id)
+                                                                                @if ($product->id == $order_product->pivot->product_id)
+
 
 
                                                                                     <tr>
@@ -105,7 +106,7 @@
                                                                                             {{ $product->price }}
                                                                                         </td>
                                                                                         <td>count :
-                                                                                            {{ $count }}
+                                                                                            {{ $count = $order_product->pivot->count }}
                                                                                         </td>
                                                                                     </tr>
                                                                                 @break
@@ -142,7 +143,7 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                        
+
                                         @endforeach
                                     </tbody>
                                     {{-- <tfoot>

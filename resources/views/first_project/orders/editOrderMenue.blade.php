@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -83,6 +84,7 @@
                                                             {{-- @php
                                                         $order_products = (array)$order->products
                                                     @endphp --}}
+
                                                             @foreach ($products as $product)
                                                                 <tr>
                                                                     <td>{{ $product->title }}</td>
@@ -98,9 +100,11 @@
                                                                             <input min="0"
                                                                                 name="Product_{{ $product->id }}"
                                                                                 placeholder="0"
-                                                                                @foreach ($pro_count as $order_product)
+                                                                                @foreach ($order_products as $order_product)
                                                                                 @if ($order_product->id == $product->id)
-                                                                                value="{{ $order_product->count }}"
+                                                                                value="{{ $order_product->pivot->count }}"
+
+
                                                                            @endif @endforeach
                                                                                 type="number"
 
@@ -135,6 +139,7 @@
                                 <label for="order_total_price">order_total_price</label>
                                 <input type="number" class="form-control" id="order_total_price"
                                     @foreach ($orders as $order)
+
                                         @if ($order->id == $order_product->order_id)
 
                                         name="order_total_price" value="{{ $order->total_price }}"
