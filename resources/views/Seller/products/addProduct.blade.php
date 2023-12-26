@@ -60,7 +60,8 @@
                         </div>
                         <div class="form-group">
                             <label for="image_address">تصویر محصول</label>
-                            <input type="image" src="submit.png" alt="Submit" width="100" height="50">
+                            <input type="file" class="form-control" id="image_address" name="image_address"
+                                   placeholder="تصویر محصول">
                         </div>
                         <div class="form-group">
                             <label for="price">قیمت</label>
