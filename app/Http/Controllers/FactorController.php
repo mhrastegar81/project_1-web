@@ -6,6 +6,7 @@ use App\Models\Factor;
 use App\Http\Requests\StoreFactorRequest;
 use App\Http\Requests\UpdateFactorRequest;
 use App\Models\Order;
+use App\Models\Product;
 
 class FactorController extends Controller
 {
@@ -14,9 +15,10 @@ class FactorController extends Controller
      */
     public function index()
     {
-        $checks = Order::find(2)->factor;
-        dd($checks);
-        return view('first_project.checks.checksData',['checks' => $checks]);
+        $factors = Factor::all();
+
+
+        return view('first_project.checks.checksData',['factors' => $factors]);
     }
 
     /**
@@ -34,10 +36,23 @@ class FactorController extends Controller
      */
     public function store(StoreFactorRequest $request)
     {
+        $order = Order::find($request->order_id);
+        $products = $order->products()->where('order_id', $request->order_id)->get();
+        foreach($products as $product){
+            $sold_number = $product->pivot->count;
+            $inventory = $product->inventory - $sold_number;
+            $sold_number += $product->sold_number ;
+            Product::where('id', $product->id)->update([
+                'inventory' => $inventory,
+                'sold_number' => $sold_number,
+            ]);
+        }
+
         Factor::create([
             'order_id' => $request->order_id,
         ]);
-        return redirect('/factor');
+
+        return redirect('/Factor');
     }
 
     /**
@@ -51,9 +66,10 @@ class FactorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Factor $factor)
+    public function edit(Factor $factor,$id)
     {
-        //
+        $check = Factor::find($id);
+        return view('first_project.checks.editCheckMenue',['check'=> $check]);
     }
 
     /**
@@ -67,8 +83,9 @@ class FactorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Factor $factor)
+    public function destroy(Factor $factor, $id)
     {
-        //
+        Factor::where('id', $id)->delete();
+        return redirect('/Factor');
     }
 }

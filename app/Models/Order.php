@@ -10,15 +10,16 @@ class Order extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
 
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
     public function products(){
-        return $this->belongsToMany('App\Models\Product');
+        return $this->belongsToMany(Product::class)->withPivot('count');
     }
     public function factor(){
-        return $this->belongsTo(Factor::class);
+        return $this->hasOne(Factor::class);
     }
 }

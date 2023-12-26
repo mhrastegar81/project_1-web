@@ -7,7 +7,7 @@
     <title>پنل مدیریت | کاربر جدید</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @include('first_project.styleSheets.styleSheets')
+    @include('Seller.styleSheets.styleSheets')
     <link rel="stylesheet" href="{{ asset('persenalCss/app.css') }}">
 </head>
 
@@ -15,26 +15,26 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        @include('first_project.navbar.navbar')
+        @include('Seller.navbar.navbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Sidebar -->
-            @include('first_project.Sidebar.Sidebar')
+            @include('Seller.Sidebar.Sidebar')
             <!-- /.sidebar -->
         </aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
             <!-- Content Header (Page header) -->
-            @include('first_project.header.editingData.editing_product')
+            @include('Seller.header.editingData.editing_product')
             <!-- /.content-header -->
             <!-- Main row -->
             <section class="content">
                 <!-- form start -->
                 <div class="container-fluid">
-                    <form role="form" method="post" action="{{ route('products.update', ['id' => $product->id]) }}">
+                    <form role="form" method="post" action="{{ route('seller.products.update', ['id' => $product->id]) }}">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
@@ -81,7 +81,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-    @include('first_project.footer.main_footer')
+    @include('Seller.footer.main_footer')
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -90,7 +90,7 @@
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-    @include('first_project.scripts')
+    @include('Seller.scripts')
 </body>
 
 </html>

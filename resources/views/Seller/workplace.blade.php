@@ -6,20 +6,20 @@
     <title>پنل مدیریت | داشبورد اول</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @include('first_project.styleSheets.styleSheets')
+    @include('Seller.styleSheets.styleSheets')
 {{--    <link rel="stylesheet" href="{{asset('persenalCss/app.css')}}">--}}
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('first_project.navbar.navbar')
+    @include('Seller.navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('first_project.Sidebar.Sidebar')
+        @include('Seller.Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
 
@@ -27,7 +27,7 @@
     <div class="content-wrapper">
 
         <!-- Content Header (Page header) -->
-        @include('first_project.header.dashboard_header')
+        @include('Seller.header.dashboard_header')
         <!-- /.content-header -->
 
         <!-- Main content -->
@@ -610,7 +610,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-    @include('first_project.footer.main_footer')
+    @include('Seller.footer.main_footer')
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -619,7 +619,7 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('first_project.scripts')
+@include('Seller.scripts')
 </body>
 
 </html>

@@ -6,20 +6,20 @@
     <title>پنل مدیریت | داشبورد اول</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @include('first_project.styleSheets.styleSheets')
+    @include('Seller.styleSheets.styleSheets')
     <link rel="stylesheet" href="{{asset('persenalCss/app.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('first_project.navbar.navbar')
+    @include('Seller.navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('first_project.Sidebar.Sidebar')
+        @include('Seller.Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
 
@@ -27,25 +27,25 @@
     <div class="content-wrapper">
 
         <!-- Content Header (Page header) -->
-        @include('first_project.header.adding.addProduct_header')
+        @include('Seller.header.adding.addProduct_header')
         <!-- /.content-header -->
         <!-- Main row -->
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
+                <form role="form" method="post" action="{{route('seller.products.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
 
-                            
+
 
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="seller">فروشنده</label>
                                     <select name="seller" class="form-control">
                                             <option value="{{ $user->id }}">
-                                                {{ $user->name }}
+                                                {{ $user->user_name }}
                                             </option>
                                     </select>
 
@@ -57,6 +57,10 @@
                             <label for="title">نام محصول</label>
                             <input type="text" class="form-control" id="title" name="title"
                                    placeholder="نام">
+                        </div>
+                        <div class="form-group">
+                            <label for="image_address">تصویر محصول</label>
+                            <input type="image" src="submit.png" alt="Submit" width="100" height="50">
                         </div>
                         <div class="form-group">
                             <label for="price">قیمت</label>
@@ -98,7 +102,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-@include('first_project.footer.main_footer')
+@include('Seller.footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -107,7 +111,7 @@
 <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('first_project.scripts')
+@include('Seller.scripts')
 </body>
 
 </html>

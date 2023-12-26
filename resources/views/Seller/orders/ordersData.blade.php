@@ -8,20 +8,21 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @include('first_project.styleSheets.dataStyle')
-    @include('first_project.styleSheets.styleSheets')
+    @include('Seller.styleSheets.dataStyle')
+    @include('Seller.styleSheets.styleSheets')
+
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        @include('first_project.navbar.navbar')
+        @include('Seller.navbar.navbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Sidebar -->
-            @include('first_project.Sidebar.Sidebar')
+            @include('Seller.Sidebar.Sidebar')
             <!-- /.sidebar -->
         </aside>
 
@@ -29,7 +30,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
 
-            @include('first_project.header.data.ordersData_header')
+            @include('Seller.header.data.ordersData_header')
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -46,38 +47,48 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>اسم سفارش</th>
-                                                <th>مشتری</th>
                                                 <th>لیست محصولات</th>
                                                 <th>قیمت کل</th>
-                                                <th>ویرایش</th>
                                                 <th>حذف</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @php($temp = 0)
                                             @foreach ($orders as $order)
                                                 <tr>
+                                                    @if ($order->status == 'red')
+                                                        <td style="background-color: red; color:white;border-radius:5px;">
 
-                                                    <td>{{ $order->id }}</td>
-                                                    <td>{{ $order->title }}</td>
-                                                    <td>
-                                                        <a class="btn" data-bs-toggle="collapse"
-                                                            href="#collapseC{{ $order->user->id }}{{ $temp }}">
-                                                            {{ $order->user->id }}
-                                                        </a>
-                                                        <div id="collapseC{{ $order->user->id }}{{ $temp++ }}"
-                                                            class="collapse" data-bs-parent="#accordion">
-                                                            <div class="card-body">
-                                                                <table>
-                                                                    <tr>
-                                                                        <th>{{ $order->user->name }}
-                                                                            {{ $order->user->last_name }}</th>
-                                                                        <th>{{ $order->user->email }}</th>
-                                                                    </tr>
-                                                                </table>
+                                                            <a class="btn" data-bs-toggle="collapse"
+                                                                href="#collapseC{{ $order->id }}{{ $temp }}">
+
+                                                                {{ $order->id }}
+
+                                                            </a>
+                                                            <div id="collapseC{{ $order->user->id }}{{ $temp++ }}"
+                                                                class="collapse" data-bs-parent="#accordion">
+                                                                <div class="card-body">
+                                                                    <table>
+                                                                        <tr>
+                                                                            <div style="width: 10em;">
+                                                                                <th> وضعیت سفارش  :
+                                                                                {{"تاریخ ارسال کالا به پایان رسیده است"}}
+                                                                            </th>
+                                                                        </div>
+
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        </td>
+                                                    @else
+                                                    <td>
+                                                        {{ $order->id }}
                                                     </td>
+                                                    @endif
+                                                    <td>{{ $order->title }}</td>
+
 
 
                                                     <td>
@@ -95,9 +106,6 @@
                                                                         @foreach ($order->products as $order_product)
                                                                             @if ($order->id == $order_product->pivot->order_id)
                                                                                 @if ($product->id == $order_product->pivot->product_id)
-
-
-
                                                                                     <tr>
                                                                                         <td>name :
                                                                                             {{ $product->title }}
@@ -120,20 +128,11 @@
                                                     </div>
                                                 </td>
                                                 <td>{{ $order->total_price }}</td>
-                                                {{-- <td>{{ $order->balance }}</td> --}}
+
+
                                                 <td>
                                                     <form class=""
-                                                        action="{{ route('orders.edit', ['id' => $order->id]) }}"
-                                                        method="get">
-                                                        <button type="submit">
-                                                            <i
-                                                                class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form class=""
-                                                        action="{{ route('orders.destroy', ['id' => $order->id]) }}"
+                                                        action="{{ route('seller.orders.destroy', ['id' => $order->id]) }}"
                                                         method="post">
                                                         @csrf
                                                         <button type="submit"
@@ -142,8 +141,8 @@
                                                         </button>
                                                     </form>
                                                 </td>
-                                            </tr>
 
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                     {{-- <tfoot>
@@ -172,7 +171,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @include('first_project.footer.main_footer')
+    @include('Seller.footer.main_footer')
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

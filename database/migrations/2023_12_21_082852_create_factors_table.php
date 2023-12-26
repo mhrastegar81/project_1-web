@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('order_id')->unsigned()->index();
             $table->timestamps();
-            $table->softDeletes('deleted_at');
+            $table->softDeletes();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
         });
     }

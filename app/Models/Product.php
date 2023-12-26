@@ -14,6 +14,9 @@ class Product extends Model
     protected $dates = ['deleted_at'];
 
     public function orders(){
-        return $this->belongsToMany('App\Models\Order');
+        return $this->belongsToMany(Order::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

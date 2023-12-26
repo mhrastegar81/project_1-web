@@ -9,8 +9,8 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @include('first_project.styleSheets.dataStyle')
-    @include('first_project.styleSheets.styleSheets')
+    @include('Seller.styleSheets.dataStyle')
+    @include('Seller.styleSheets.styleSheets')
 
 
 </head>
@@ -18,13 +18,13 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        @include('first_project.navbar.navbar')
+        @include('Seller.navbar.navbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Sidebar -->
-            @include('first_project.Sidebar.Sidebar')
+            @include('Seller.Sidebar.Sidebar')
             <!-- /.sidebar -->
         </aside>
 
@@ -32,7 +32,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
 
-            @include('first_project.header.data.productsData_header')
+            @include('Seller.header.data.productsData_header')
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -47,14 +47,16 @@
                                             <th>نام کالا</th>
                                             <th>قیمت</th>
                                             <th>موجودی</th>
+                                            <th>مشاهده کلا</th>
                                             <th>ویرایش</th>
                                             <th>حذف</th>
+                                            <th>وضعیت کالا</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php($temp = 0)
                                         @foreach ($products as $product)
-                                            
+
 
                                             <tr>
                                                 <td>{{ $product->id }}</td>
@@ -62,10 +64,19 @@
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->inventory }}</td>
 
+                                                <td>
 
+                                                    <form action="{{ route('seller.products.show', ['id' => $product->id]) }}"
+                                                        method="get">
+                                                        <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box" viewBox="0 0 16 16">
+                                                            <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+                                                          </svg>
+                                                        </button>
+                                                    </form>
+                                                </td>
 
                                                 <td>
-                                                    <form action="{{ route('products.edit', ['id' => $product->id]) }}"
+                                                    <form action="{{ route('seller.products.edit', ['id' => $product->id]) }}"
                                                         method="get">
                                                         <button type="submit"><i
                                                                 class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
@@ -74,13 +85,23 @@
                                                 </td>
                                                 <td>
                                                     <form
-                                                        action="{{ route('products.destroy', ['id' => $product->id]) }}"
+                                                        action="{{ route('seller.products.destroy', ['id' => $product->id]) }}"
                                                         method="post">
                                                         @csrf
                                                         <button type="submit"
                                                             onclick="return confirm('Are you sure?')"><i
                                                                 class="fa-regular fa-trash-can"></i></button>
                                                     </form>
+                                                </td>
+                                                <td>
+                                                    @if ($product->status == 'waiting')
+                                                        درحال بررسی
+                                                    @elseif ($product->status == 'difined')
+                                                        ثبت شده
+                                                    @else
+                                                        رد صلاحیت
+                                                    @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -91,8 +112,10 @@
                                             <th>نام کالا</th>
                                             <th>قیمت</th>
                                             <th>موجودی</th>
+                                            <th>مشاهده کلا</th>
                                             <th>ویرایش</th>
                                             <th>حذف</th>
+                                            <th>وضعیت کالا</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -108,7 +131,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        @include('first_project.footer.main_footer')
+        @include('Seller.footer.main_footer')
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">

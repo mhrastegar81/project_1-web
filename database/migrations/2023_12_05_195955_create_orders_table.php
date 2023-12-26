@@ -16,8 +16,9 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('title',255);
             $table->bigInteger('total_price')->unsigned();
+            $table->enum('status',['green','yellow','red'])->default('green');
             $table->timestamps();
-            $table->softDeletes('deleted_at');
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

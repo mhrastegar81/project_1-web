@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
+            $table->enum('role', ['admin', 'seller','buyer'])->default('buyer');
             $table->string('user_name', 255)->nullable()->unique();
             $table->string('first_name', 255)->nullable();
             $table->string('last_name',255)->nullable();
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->string('city', 255)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
-            $table->softDeletes('deleted_at');
+            $table->softDeletes();
         });
     }
 
