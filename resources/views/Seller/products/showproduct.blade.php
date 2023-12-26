@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل مدیریت | جدول داده</title>
+    <title>پنل فروشندگان</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -43,8 +43,7 @@
                                 <table id="Data" class="table table-bordered table-striped table table-hover">
 
                                     <thead>
-                                        
-                                            <img width="400" , height="400" src="{{ $product->image_name }}">
+                                        <img width="400" , height="400" src="{{ $product->image_address }}">
 
                                         <tr>
 
@@ -56,12 +55,12 @@
                                     </thead>
                                     <tbody>
 
-                                        <tr>
+                                            <tr>
 
-                                            <td>{{ $product->title }}</td>
-                                            <td>{{ $product->price }}</td>
-                                            <td>{{ $product->inventory }}</td>
-                                        </tr>
+                                                <td>{{ $product->title }}</td>
+                                                <td>{{ $product->price }}</td>
+                                                <td>{{ $product->inventory }}</td>
+                                            </tr>
 
                                     </tbody>
                                     <tfoot>

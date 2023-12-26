@@ -89,7 +89,7 @@
                     <a href="#" class="nav-link">
                         <i class="fas fa-cart-arrow-down nav-icon"></i>
                         <p>
-                            سفارشات
+                            مدیریت سفارشات جاری
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>

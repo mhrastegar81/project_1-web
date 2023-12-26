@@ -58,7 +58,8 @@
                                             @foreach ($orders as $order)
                                                 <tr>
                                                     @if ($order->status == 'red')
-                                                        <td style="background-color: red; color:white;border-radius:5px;">
+                                                        <td
+                                                            style="background-color: red; color:white;border-radius:5px;">
 
                                                             <a class="btn" data-bs-toggle="collapse"
                                                                 href="#collapseC{{ $order->id }}{{ $temp }}">
@@ -72,10 +73,10 @@
                                                                     <table>
                                                                         <tr>
                                                                             <div style="width: 10em;">
-                                                                                <th> وضعیت سفارش  :
-                                                                                {{"تاریخ ارسال کالا به پایان رسیده است"}}
-                                                                            </th>
-                                                                        </div>
+                                                                                <th> وضعیت سفارش :
+                                                                                    {{ 'تاریخ ارسال کالا به پایان رسیده است' }}
+                                                                                </th>
+                                                                            </div>
 
                                                                         </tr>
                                                                     </table>
@@ -83,9 +84,9 @@
                                                             </div>
                                                         </td>
                                                     @else
-                                                    <td>
-                                                        {{ $order->id }}
-                                                    </td>
+                                                        <td>
+                                                            {{ $order->id }}
+                                                        </td>
                                                     @endif
                                                     <td>{{ $order->title }}</td>
 
@@ -108,7 +109,9 @@
                                                                                 @if ($product->id == $order_product->pivot->product_id)
                                                                                     <tr>
                                                                                         <td>name :
+                                                                                            <a href="{{route('seller.products.show',['id'=> $product->id])}}">
                                                                                             {{ $product->title }}
+                                                                                            </a>
                                                                                         </td>
                                                                                         <td>price :
                                                                                             {{ $product->price }}

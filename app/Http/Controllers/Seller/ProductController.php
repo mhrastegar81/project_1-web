@@ -44,7 +44,7 @@ class ProductController extends Controller
             'image_address' =>$request->image_address,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
-        
+
         return redirect('/seller/products');
     }
 
