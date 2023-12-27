@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -12,13 +13,16 @@ class RoleController extends Controller
     public function index()
     {
         $role = auth()->user()->role;
-        
+
         if ($role == 'seller') {
-            return view('Seller.workplace');
+            $categories = Category::all();
+            return view('Seller.workplace',['categories'=>$categories]);
         } elseif ($role == 'buyer') {
-            return view('Buyer.workplace');
+            $categories = Category::all();
+            return view('Buyer.workplace',['categories'=>$categories]);
         } else{
-            return view('Admin.workplace');
+            $categories = Category::all();
+            return view('Admin.workplace',['categories'=>$categories]);
         }
     }
 }

@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class SellerProductController extends Controller
 {
     /**
      * Display a listing of the resource.

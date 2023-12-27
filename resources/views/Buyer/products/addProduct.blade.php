@@ -3,23 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل فروشندگان</title>
+    <title>پنل مدیریت | داشبورد اول</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @include('Seller.styleSheets.styleSheets')
+    @include('first_project.styleSheets.styleSheets')
     <link rel="stylesheet" href="{{asset('persenalCss/app.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('Seller.navbar.navbar')
+    @include('first_project.navbar.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Sidebar -->
-        @include('Seller.Sidebar.Sidebar')
+        @include('first_project.Sidebar.Sidebar')
         <!-- /.sidebar -->
     </aside>
 
@@ -27,13 +27,13 @@
     <div class="content-wrapper">
 
         <!-- Content Header (Page header) -->
-        @include('Seller.header.adding.addProduct_header')
+        @include('first_project.header.adding.addProduct_header')
         <!-- /.content-header -->
         <!-- Main row -->
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('seller.products.store')}}" enctype="multipart/form-data">
+                <form role="form" method="post" action="{{route('buyer.order.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -42,10 +42,10 @@
 
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="seller">فروشنده</label>
+                                    <label for="seller">کاربر</label>
                                     <select name="seller" class="form-control">
                                             <option value="{{ $user->id }}">
-                                                {{ $user->user_name }}
+                                                {{ $user->name }}
                                             </option>
                                     </select>
 
@@ -57,11 +57,6 @@
                             <label for="title">نام محصول</label>
                             <input type="text" class="form-control" id="title" name="title"
                                    placeholder="نام">
-                        </div>
-                        <div class="form-group">
-                            <label for="image_address">تصویر محصول</label>
-                            <input type="text" class="form-control" id="image_address" name="image_address"
-                                   placeholder="تصویر محصول">
                         </div>
                         <div class="form-group">
                             <label for="price">قیمت</label>
@@ -103,7 +98,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-@include('Seller.footer.main_footer')
+@include('first_project.footer.main_footer')
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -112,7 +107,7 @@
 <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@include('Seller.scripts')
+@include('first_project.scripts')
 </body>
 
 </html>
