@@ -114,7 +114,6 @@ class BuyerController extends Controller
 
                 $product_id = substr($key, -1);
 
-                $order_products = $order->products()->where(['order_id' => $id, 'product_id' => $product_id])->first();
 
                 $products = Product::where('id', $product_id)->first();
                 $total_price += $products->price * $product_count;

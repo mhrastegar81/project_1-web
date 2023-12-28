@@ -72,13 +72,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('buyer.Factor.create')}}" class="nav-link">
+                            <a href="{{route('buyer.factor.create')}}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p> فاکتور جدید</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('buyer.Factor.index')}}" class="nav-link">
+                            <a href="{{route('buyer.factor.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست فاکتورها</p>
                             </a>

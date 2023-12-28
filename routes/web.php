@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Buyer\BuyerFactorController;
 use App\Http\Controllers\Buyer\BuyerOrderController;
 use App\Http\Controllers\Buyer\BuyerProductController;
 use App\Http\Controllers\FactorController;
@@ -53,11 +54,13 @@ Route::middleware(['auth', 'buyer'])->name('buyer.')->prefix('buyer')->group(fun
 
     //order
     Route::get('/order', [BuyerOrderController::class, 'index'])->name('orders.index');
-    Route::get('/order/create',[BuyerOrderController::class, 'create'])->name('orders.create');
+    Route::any('/order/{product_id}/create',[BuyerOrderController::class, 'create'])->name('orders.create');
+    Route::post('/order', [BuyerOrderController::class, 'store'])->name('orders.store');
     Route::get('/order/{id}/show', [BuyerOrderController::class, 'show'])->name('orders.show');
-    Route::get('/order/{id}/edit', [BuyerOrderController::class, 'edit'])->name('order.edit');
-    Route::any('/order/{id}', [BuyerOrderController::class, 'update'])->name('order.update');
-    Route::post('/order/{id}/destroy', [BuyerOrderController::class, 'destroy'])->name('order.destroy');
+    Route::any('/order/{id}/edit', [BuyerOrderController::class, 'edit'])->name('orders.edit');
+    Route::any('/order/{id}', [BuyerOrderController::class, 'update'])->name('orders.update');
+    Route::post('/order/{id}/destroy', [BuyerOrderController::class, 'destroy'])->name('orders.destroy');
+    Route::post('/order/{id}/pay', [BuyerOrderController::class, 'pay'])->name('orders.pay');
 
 
     //products
@@ -66,11 +69,12 @@ Route::middleware(['auth', 'buyer'])->name('buyer.')->prefix('buyer')->group(fun
 
 
     //factor
-    Route::get('/Factor', [FactorController::class, 'index'])->name('Factor.index');
-    Route::get('/Factor/create', [FactorController::class, 'create'])->name('Factor.create');
-    Route::post('/Factor', [FactorController::class, 'store'])->name('Factor.store');
-    Route::get('/Factor/{id}/edit', [FactorController::class, 'edit'])->name('Factor.edit');
-    Route::any('/Factor/{id}', [FactorController::class, 'update'])->name('Factor.update');
-    Route::post('/Factor/{id}/destroy', [FactorController::class, 'destroy'])->name('Factor.destroy');
+    Route::get('/factor', [BuyerFactorController::class, 'index'])->name('factor.index');
+    Route::get('/factor/create', [BuyerFactorController::class, 'create'])->name('factor.create');
+    Route::post('/factor', [BuyerFactorController::class, 'store'])->name('factor.store');
+    Route::get('/factor/{id}/edit', [BuyerFactorController::class, 'edit'])->name('factor.edit');
+    Route::any('/factor/{id}', [BuyerFactorController::class, 'update'])->name('factor.update');
+    Route::any('/factor/{id}', [BuyerFactorController::class, 'update_status'])->name('factor.update_status');
+    Route::post('/factor/{id}/destroy', [BuyerFactorController::class, 'destroy'])->name('factor.destroy');
 
 });

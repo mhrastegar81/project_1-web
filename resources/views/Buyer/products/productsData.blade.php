@@ -29,6 +29,8 @@
             box-sizing: border-box;
             display: inline;
         }
+
+
     </style>
 
 </head>
@@ -60,15 +62,6 @@
                             <div class="card-body">
                                 <table id="Data" class="table table-bordered table-striped table table-hover">
 
-                                    @foreach ($categories as $category)
-                                        <div id="d1"
-                                            style="background-image: {{ URL($category->image_address) }};">
-                                            <a href="">
-                                                <img width="400px" height="300px" src="{{URL($category->image_address)}}">
-                                            </a>
-                                            {{ $category->name }}
-                                        </div>
-                                    @endforeach
                                     <thead>
 
 
@@ -79,7 +72,6 @@
                                             <th>قیمت</th>
                                             <th>موجودی</th>
                                             <th>مشاهده کالا</th>
-                                            <th>افزودن به سبد خرید</th>
 
                                         </tr>
                                     </thead>
@@ -88,7 +80,7 @@
                                         @foreach ($products as $product)
                                             <tr>
                                                 <td>{{ $product->id }}</td>
-                                                <td><img width="40" height="40"
+                                                <td><img width="100" height="100"
                                                         src="{{ $product->image_address }}">
                                                 </td>
                                                 </td>
@@ -109,17 +101,6 @@
                                                         </button>
                                                     </form>
                                                 </td>
-
-                                                <td>
-                                                    <form
-                                                        action="{{ route('buyer.orders.create', ['id' => $product->id]) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        <button type="submit"
-                                                            onclick="return confirm('Are you sure?')"><i
-                                                                class="fa-regular fa-pen-to-square fa-flip-horizontal"></i></button>
-                                                    </form>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -131,7 +112,6 @@
                                             <th>قیمت</th>
                                             <th>موجودی</th>
                                             <th>مشاهده کالا</th>
-                                            <th>افزودن به سبد خرید</th>
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -38,7 +38,7 @@
                 <div class="container-fluid">
 
                     {{-- {{dd($orders)}} --}}
-                    <form role="form" method="post" action="{{ route('orders.update', ['id' => $id]) }}">
+                    <form role="form" method="post" action="{{ route('buyer.orders.update', ['id' => $id]) }}">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
@@ -85,7 +85,7 @@
                                                         $order_products = (array)$order->products
                                                     @endphp --}}
 
-                                                            @foreach ($products as $product)
+
                                                                 <tr>
                                                                     <td>{{ $product->title }}</td>
                                                                     <td>{{ $product->price }}</td>
@@ -100,8 +100,9 @@
                                                                             <input min="0"
                                                                                 name="Product_{{ $product->id }}"
                                                                                 placeholder="0"
-                                                                                @foreach ($order_products as $order_product)
-                                                                                @if ($order_product->id == $product->id)
+                                                                                @foreach ($order->products as $order_product)
+                                                                                @if ($order_product->pivot->product_id == $product->id)
+                                                                                    
                                                                                 value="{{ $order_product->pivot->count }}"
 
 
@@ -120,7 +121,6 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -138,13 +138,13 @@
                             <div class="form-group">
                                 <label for="order_total_price">order_total_price</label>
                                 <input type="number" class="form-control" id="order_total_price"
-                                    @foreach ($orders as $order)
+
 
                                         @if ($order->id == $order_product->order_id)
 
                                         name="order_total_price" value="{{ $order->total_price }}"
                                         placeholder="order_total_price">
-                                        @endif @endforeach
+                                        @endif
                                     </div>
 
                                 {{-- <div class="form-group">

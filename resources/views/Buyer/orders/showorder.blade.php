@@ -5,26 +5,25 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل فروشندگان</title>
+    <title>پنل کاربران</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @include('Seller.styleSheets.dataStyle')
-    @include('Seller.styleSheets.styleSheets')
-
+    @include('Buyer.styleSheets.dataStyle')
+    @include('Buyer.styleSheets.styleSheets')
 
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        @include('Seller.navbar.navbar')
+        @include('Buyer.navbar.navbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Sidebar -->
-            @include('Seller.Sidebar.Sidebar')
+            @include('Buyer.Sidebar.Sidebar')
             <!-- /.sidebar -->
         </aside>
 
@@ -32,7 +31,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
 
-            @include('Seller.header.data.productsData_header')
+            @include('Buyer.header.data.productsData_header')
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -43,13 +42,15 @@
                                 <table id="Data" class="table table-bordered table-striped table table-hover">
 
                                     <thead>
-                                        <img width="500" , height="400" src="{{ $product->image_address }}">
+                                        <img width="400" , height="400" src="{{ $product->image_address }}">
 
                                         <tr>
 
                                             <th>نام کالا</th>
                                             <th>قیمت</th>
                                             <th>موجودی</th>
+                                            <th>وضعیت پرداخت</th>
+                                            <th>ویرایش</th>
 
                                         </tr>
                                     </thead>
@@ -60,6 +61,16 @@
                                                 <td>{{ $product->title }}</td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->inventory }}</td>
+                                                <td>{{$order->pay_status}}
+                                                <td>
+                                                    <form
+                                                        action="{{ route('buyer.orders.edit', ['id' => $order->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        <button type="submit" ><i
+                                                            class="fa-regular fa-pen-to-square fa-flip-horizontal"></i></button>
+                                                    </form>
+                                                </td>
                                             </tr>
 
                                     </tbody>
@@ -68,6 +79,8 @@
                                             <th>نام کالا</th>
                                             <th>قیمت</th>
                                             <th>موجودی</th>
+                                            <th>وضعیت پرداخت</th>
+                                            <th>ویرایش</th>
 
                                         </tr>
                                     </tfoot>
@@ -84,7 +97,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        @include('Seller.footer.main_footer')
+        @include('Buyer.footer.main_footer')
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">

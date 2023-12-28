@@ -50,6 +50,7 @@
                                             <th>نام کالا</th>
                                             <th>قیمت</th>
                                             <th>موجودی</th>
+                                            <th>افزودن به سبد خرید</th>
 
                                         </tr>
                                     </thead>
@@ -60,6 +61,15 @@
                                                 <td>{{ $product->title }}</td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->inventory }}</td>
+                                                <td>
+                                                    <form
+                                                        action="{{ route('buyer.orders.create', ['product_id' => $product->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        <button type="submit" ><i
+                                                            class="fas fa-cart-arrow-down nav-icon"></i></button>
+                                                    </form>
+                                                </td>
                                             </tr>
 
                                     </tbody>
@@ -68,6 +78,7 @@
                                             <th>نام کالا</th>
                                             <th>قیمت</th>
                                             <th>موجودی</th>
+                                            <th>افزودن به سبد خرید</th>
 
                                         </tr>
                                     </tfoot>

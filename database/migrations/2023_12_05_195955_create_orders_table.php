@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title',255);
             $table->bigInteger('total_price')->unsigned();
             $table->enum('status',['green','yellow','red'])->default('green');
+            $table->enum('pay_status',['payed','unpayed'])->default('unpayed');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

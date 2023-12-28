@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class SellerProductController extends Controller
     {
         $id = auth()->user()->id;
         $user = User::find($id);
-        return view('Seller.products.addProduct',['user' => $user]);
+        $categories = Category::all();
+        return view('Seller.products.addProduct',['user' => $user,'categories'=> $categories ]);
     }
 
     /**
@@ -36,6 +38,7 @@ class SellerProductController extends Controller
     {
         Product::create([
             'user_id' => $request->seller,
+            'category_id' =>$request->category,
             'title' => $request->title,
             'price' => $request->price,
             'inventory' => $request->inventory,
