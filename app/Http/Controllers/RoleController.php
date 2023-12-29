@@ -10,19 +10,23 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $role = auth()->user()->role;
 
+        if(isset($request->category_search)){
+            $categories = Category::where('name', $request->category_search)->get();
+        }else{
+            $categories = Category::all();
+        }
+
         if ($role == 'seller') {
-            $categories = Category::all();
-            return view('Seller.workplace',['categories'=>$categories]);
+            return view('Seller.workplace', ['categories' => $categories]);
         } elseif ($role == 'buyer') {
-            $categories = Category::all();
-            return view('Buyer.workplace',['categories'=>$categories]);
-        } else{
-            $categories = Category::all();
-            return view('Admin.workplace',['categories'=>$categories]);
+            return view('Buyer.workplace', ['categories' => $categories]);
+        } else {
+
+            return view('Admin.workplace', ['categories' => $categories]);
         }
     }
 }

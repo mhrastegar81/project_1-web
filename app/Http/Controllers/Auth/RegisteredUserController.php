@@ -51,4 +51,6 @@ class RegisteredUserController extends Controller
         $user->createToken('api_token')->plainTextToken;
         return redirect('/workplace');
     }
+
+    
 }

@@ -144,12 +144,11 @@ class BuyerOrderController extends Controller
 
     public function pay($id){
         $orders = Order::where('user_id',$id)->get();
-        foreach($orders as $order){
         Order::where('user_id', $id)->update([
             'pay_status' => 'payed',
         ]);
 
         return view('Buyer.checks.addCheck',['orders'=>$orders]);
-    }
+    
     }
 }
