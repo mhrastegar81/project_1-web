@@ -15,7 +15,7 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        @include('Seller.navbar.navbar')
+        @include('navbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -37,6 +37,11 @@
                     <form role="form" method="post" action="{{ route('seller.products.update', ['id' => $product->id]) }}">
                         @csrf
                         <div class="card-body">
+                            <div class="form-group">
+                                <label for="category">نام دسته بندی</label>
+                                <input type="text" class="form-control" id="category" name="category"
+                                    value="{{ $category->name }}" readonly>
+                            </div>
                             <div class="form-group">
 
                                 <label for="title">نام محصول</label>

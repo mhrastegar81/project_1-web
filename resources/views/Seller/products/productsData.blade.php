@@ -5,20 +5,39 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل فروشندگان</title>
+    <title>پنل فروشنده</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     @include('Seller.styleSheets.dataStyle')
     @include('Seller.styleSheets.styleSheets')
+    <style>
+        #d1 {
+            width: 400px;
+            height: 300px;
+            background-size: 100%;
+            background-attachment: fixed;
+            box-shadow: 0 0 5px 0;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            font-family: 'Arial';
+            color: white;
+            outline: none;
+            border: none;
+            box-sizing: border-box;
+            display: inline;
+        }
 
+    </style>
 
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        @include('Seller.navbar.navbar')
+        @include('navbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -44,39 +63,45 @@
                                     <thead>
                                         <tr>
                                             <th>id</th>
+                                            <th>تصویر</th>
                                             <th>نام کالا</th>
+                                            <th>توضیحات</th>
                                             <th>قیمت</th>
                                             <th>موجودی</th>
-                                            <th>مشاهده کلا</th>
+                                            <th>مشاهده کالا</th>
                                             <th>ویرایش</th>
                                             <th>حذف</th>
-                                            <th>وضعیت کالا</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php($temp = 0)
                                         @foreach ($products as $product)
-
-
                                             <tr>
                                                 <td>{{ $product->id }}</td>
+                                                <td><img width="100" height="100"
+                                                        src="{{URL("images/products/$product->image_address")}}">
+                                                </td>
                                                 <td>{{ $product->title }}</td>
+                                                <td>{{ $product->description }}</td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->inventory }}</td>
-
                                                 <td>
 
-                                                    <form action="{{ route('seller.products.show', ['id' => $product->id]) }}"
+                                                    <form
+                                                        action="{{ route('seller.products.show', ['id' => $product->id]) }}"
                                                         method="get">
-                                                        <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box" viewBox="0 0 16 16">
-                                                            <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
-                                                          </svg>
+                                                        <button type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                width="16" height="16" fill="currentColor"
+                                                                class="bi bi-box" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                                                            </svg>
                                                         </button>
                                                     </form>
                                                 </td>
-
                                                 <td>
-                                                    <form action="{{ route('seller.products.edit', ['id' => $product->id]) }}"
+                                                    <form
+                                                        action="{{ route('seller.products.edit', ['id' => $product->id]) }}"
                                                         method="get">
                                                         <button type="submit"><i
                                                                 class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
@@ -93,29 +118,20 @@
                                                                 class="fa-regular fa-trash-can"></i></button>
                                                     </form>
                                                 </td>
-                                                <td>
-                                                    @if ($product->status == 'waiting')
-                                                        درحال بررسی
-                                                    @elseif ($product->status == 'difined')
-                                                        ثبت شده
-                                                    @else
-                                                        رد صلاحیت
-                                                    @endif
-
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>id</th>
+                                            <th>تصویر</th>
                                             <th>نام کالا</th>
+                                            <th>توضیحات</th>
                                             <th>قیمت</th>
                                             <th>موجودی</th>
-                                            <th>مشاهده کلا</th>
+                                            <th>مشاهده کالا</th>
                                             <th>ویرایش</th>
                                             <th>حذف</th>
-                                            <th>وضعیت کالا</th>
                                         </tr>
                                     </tfoot>
                                 </table>

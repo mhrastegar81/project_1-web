@@ -43,9 +43,9 @@ Route::middleware(['auth', 'seller'])->name('seller.')->prefix('/seller')->group
     Route::post('/order/{id}/destroy', [SellerOrderController::class, 'destroy'])->name('orders.destroy');
 
     //products
-    Route::get('/products', [SellerProductController::class, 'index'])->name('products.index');
+    Route::get('/products/index/{category_id?}', [SellerProductController::class, 'index'])->name('products.index');
     Route::get('/products/create', [SellerProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [SellerProductController::class, 'store'])->name('products.store');
+    Route::any('/products', [SellerProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/show', [SellerProductController::class, 'show'])->name('products.show');
     Route::get('/products/{id}/edit', [SellerProductController::class, 'edit'])->name('products.edit');
     Route::any('/products/{id}', [SellerProductController::class, 'update'])->name('products.update');

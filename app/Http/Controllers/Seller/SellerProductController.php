@@ -13,10 +13,10 @@ class SellerProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($category_id)
     {
         $id = auth()->user()->id;
-        $products = Product::where('user_id',$id)->get();
+        $products = Product::where(['user_id' => $id, 'category_id' => $category_id])->get();
         return view('Seller.products.productsData', ['products' => $products]);
     }
 
@@ -28,7 +28,7 @@ class SellerProductController extends Controller
         $id = auth()->user()->id;
         $user = User::find($id);
         $categories = Category::all();
-        return view('Seller.products.addProduct',['user' => $user,'categories'=> $categories ]);
+        return view('Seller.products.addProduct', ['user' => $user, 'categories' => $categories]);
     }
 
     /**
@@ -36,15 +36,16 @@ class SellerProductController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         Product::create([
             'user_id' => $request->seller,
-            'category_id' =>$request->category,
+            'category_id' => $request->category,
             'title' => $request->title,
             'price' => $request->price,
             'inventory' => $request->inventory,
             'sold_number' => $request->sold_number,
             'discription' => $request->discription,
-            'image_address' =>$request->image_address,
+            'image_address' => $request->image_address,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
@@ -57,7 +58,7 @@ class SellerProductController extends Controller
     public function show(string $id)
     {
         $product = Product::find($id);
-        return view('Seller.products.showproduct',['product'=>$product]);
+        return view('Seller.products.showproduct', ['product' => $product]);
     }
 
     /**
@@ -65,9 +66,9 @@ class SellerProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::where('id',$id)->get()->first();
-
-        return view('Seller.products.editProductMenue',['product'=> $product]);
+        $product = Product::where('id', $id)->get()->first();
+        $category = Category::where('id',$product->category_id)->first();
+        return view('Seller.products.editProductMenue', ['product' => $product, 'category'=>$category]);
     }
 
     /**
@@ -80,18 +81,22 @@ class SellerProductController extends Controller
             'price' => $request->price,
             'inventory' => $request->inventory,
             'sold_number' => $request->sold_number,
-            'discription' => $request->discription,
+            'description' => $request->discription,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
-        return redirect('/seller/products');
+        $category_id = Product::find($id)->category_id;
+        return redirect("/seller/products/index/{$category_id}");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id = null)
     {
-        Product::where('id', $id)->delete();
-        return redirect('/seller/products');
+        if (!empty($id)) {
+            $product = Product::where('id', $id)->first();
+            $product->delete();
+            return redirect("/seller/products/index/$product->category_id");
+        }
     }
 }

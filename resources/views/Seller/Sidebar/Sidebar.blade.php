@@ -10,24 +10,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-
-                            <i class="fas fa-user-edit"></i>
-                            <p>ویرایش پروفایل</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <!--<a href="" class="nav-link">-->
-                            <i class="fas fa-lock"></i>
-                            <p>تغییر رمز عبور</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <!--<a href="" class="nav-link">-->
-                            <i class="fas fa-image"></i>
-                            <p>تغییر عکس پروفایل</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('logout')}}" class="nav-link">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <p>خروج</p>
