@@ -13,7 +13,7 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('Admin.navbar.navbar')
+    @include('navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -32,7 +32,7 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('admin_users.store')}}">
+                <form role="form" method="post" action="{{route('admin.users.store')}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">

@@ -13,7 +13,7 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('Admin.navbar.navbar')
+    @include('navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->

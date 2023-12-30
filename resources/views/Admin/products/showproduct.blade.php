@@ -63,7 +63,7 @@
                                                 <td>{{ $product->inventory }}</td>
                                                 <td>
                                                     <form
-                                                        action="{{ route('Admin.orders.create', ['product_id' => $product->id]) }}"
+                                                        action="{{ route('admin.orders.create') }}"
                                                         method="post">
                                                         @csrf
                                                         <button type="submit" ><i

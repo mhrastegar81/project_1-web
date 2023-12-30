@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->string('title',255);
             $table->bigInteger('total_price')->unsigned();
-            $table->enum('status',['green','yellow','red'])->default('green');
+            $table->enum('order_status',['green','yellow','red'])->default('green');
             $table->enum('pay_status',['payed','unpayed'])->default('unpayed');
             $table->timestamps();
             $table->softDeletes();

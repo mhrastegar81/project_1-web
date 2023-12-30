@@ -29,7 +29,7 @@
             box-sizing: border-box;
             display: inline;
         }
-        
+
     </style>
 
 </head>

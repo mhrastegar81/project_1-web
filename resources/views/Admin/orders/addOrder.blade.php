@@ -15,7 +15,7 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('Admin.navbar.navbar')
+    @include('navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -35,7 +35,7 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('admin_orders.store')}}">
+                <form role="form" method="post" action="{{route('admin.orders.store')}}">
                     @csrf
                     <div class="form-group">
                         <div class="col">
@@ -45,9 +45,11 @@
                         </div>
                         <label for="customer_id">customers</label>
                         <select class="form-control" id="user_id" name="user_id">
-                            <option value="{{Auth::user()->id}}">
-                                username: {{Auth::user()->user_name}}
+                            @foreach ($users as $user)
+                            <option value="{{$user->id}}">
+                                username: {{$user->user_name}}
                             </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="card-body">

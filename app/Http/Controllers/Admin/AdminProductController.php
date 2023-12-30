@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
 {
-    public function index() {
-        $products = Product::all();
+    public function index($id) {
+        $products = Product::where('category_id', $id)->get();
         return view('Admin.products.productsData', ['products' => $products]);
     }
 
@@ -32,8 +32,8 @@ class AdminProductController extends Controller
     }
 
     public function show($id) {
-        $products = Product::where('category_id', $id)->first();
-        return view('Admin.products.productsData', ['products' => $products]);
+        $product = Product::find($id);
+        return view('Admin.products.showproduct', ['product' => $product]);
     }
 
     public function edit($id) {

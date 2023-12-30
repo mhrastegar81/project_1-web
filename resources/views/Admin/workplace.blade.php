@@ -12,27 +12,43 @@
     @include('Admin.styleSheets.dataStyle')
     @include('Admin.styleSheets.styleSheets')
     <style>
-        #d1 {
+        .d1 {
 
-            padding-right: 110px;
-            padding-left: 110px;
+            position: relative;
+            margin-right: 110px;
+            margin-left: 110px;
             display: inline-block;
         }
 
-        #img {
+        .img {
             border-radius: 15px;
             box-shadow: 7px 5px 15px rgb(31, 31, 31);
         }
 
-        #img:hover {
-            filter: opacity(30%);
+        .d1:hover .p1 {
+            border-radius: 15px;
+            box-shadow: 0 0 5px 0 black;
+            width: 100%;
+            height: 100%;
+            visibility: visible;
+            opacity: 1;
+            text-align: center;
+            color: white;
+            font-size: 25px;
+            backdrop-filter: blur(5px);
+            top: 15px;
+            bottom: 0;
+            right: 15px;
+            left: 0;
+
         }
 
-        #p1 {
-            text-align: center;
-            color: black;
-            font-size: 25px;
-            text-shadow: 9px 5px 5px rgb(31, 31, 31);
+        .p1 {
+            padding: 120px;
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+
         }
     </style>
 
@@ -66,21 +82,22 @@
 
 
                                 @foreach ($categories as $category)
-                                    <div id="d1">
+                                    <div class="d1">
 
-                                        <a href="{{ route('admin.products.show', ['id' => $category->id]) }}">
+                                        <a href="{{ route('admin.products.index', ['id' => $category->id]) }}">
                                             <img width="400px" height="300px" src="{{ URL($category->image_address) }}"
-                                                id="img">
+                                                class="img">
+                                                <p class="p1">
+                                                    {{ $category->name }}
+                                                </p>
                                         </a>
 
 
-                                        <p id="p1">
-                                            {{ $category->name }}
-                                        </p>
+
                                     </div>
 
                                     @if ($category->id % 2 == 0)
-                                        <br>
+                                        <br><br><br><br>
                                     @endif
                                 @endforeach
 

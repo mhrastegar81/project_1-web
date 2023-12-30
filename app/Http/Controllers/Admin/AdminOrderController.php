@@ -19,7 +19,7 @@ class AdminOrderController extends Controller
         return view('Admin.orders.ordersData', ['orders' => $orders]);
     }
     public function create() {
-        $users = User::all();
+        $users = User::where('role', 'buyer')->get();
         $products_available = Product::all();
         return view('Admin.orders.addOrder' , ['users' => $users , 'products_available' => $products_available]);
     }

@@ -14,7 +14,7 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
-    @include('Admin.navbar.navbar')
+    @include('navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -36,7 +36,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div id="accordionHead">
-                                <form role="form" method="get" action="{{ route('admin_factors.index') }}">
+                                <form role="form" method="get" action="{{ route('admin.factors.index') }}">
                                     <div class="card">
                                         <div class="card-header bg-light">
                                             <a class="btn btn-secondary" data-bs-toggle="collapse" href="#fillters">
@@ -119,7 +119,7 @@
                                             </div>
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-info">فیلتر</button>
-                                                <a href="{{ route('admin_factors.index') }}">
+                                                <a href="{{ route('admin.factors.index') }}">
                                                     <button type="button" class="btn btn-warning">حذف فیلتر ها</button>
                                                 </a>
                                             </div>
@@ -146,7 +146,7 @@
                                         <td>{{ $check->order->pay_status}}</td>
                                         <td>
 
-                                            <form action="{{route('admin_factors.edit',['id'=>$check->id])}}">
+                                            <form action="{{route('admin.factors.edit',['id'=>$check->id])}}">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit">
@@ -159,7 +159,7 @@
 
                                         </td>
                                         <td>
-                                            <form action="{{route('admin_factors.destroy',['id'=>$check->id])}}"
+                                            <form action="{{route('admin.factors.destroy',['id'=>$check->id])}}"
                                                   method="post">
                                                 @csrf
                                                 <button type="submit" onclick="return confirm('Are you sure?')">
@@ -168,7 +168,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{route('admin_factors.update_status',['id'=>$check->id])}}"
+                                            <form action="{{route('admin.factors.update_status',['id'=>$check->id])}}"
                                                   method="post">
                                                 @csrf
                                                 <input type="submit" name="payment_id" value="تغییر وضعیت پرداخت"

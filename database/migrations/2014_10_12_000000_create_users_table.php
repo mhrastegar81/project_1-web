@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->enum('role', ['admin', 'seller','buyer'])->default('buyer');
+            $table->enum('status',['waiting','defined','undefined'])->default('waiting');
             $table->string('user_name', 255)->nullable()->unique();
             $table->string('first_name', 255)->nullable();
             $table->string('last_name',255)->nullable();

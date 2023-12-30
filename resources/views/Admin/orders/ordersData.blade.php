@@ -13,7 +13,7 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
-    @include('Admin.navbar.navbar')
+    @include('navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -101,7 +101,7 @@
                                             </td>
                                             <td>{{ $order->total_price }}</td>
                                             <td>
-                                                <form class="" action="{{route('admin_orders.edit',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('admin.orders.edit',['id'=>$order->id])}}"
                                                       method="get">
                                                     <button type="submit">
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
@@ -109,7 +109,7 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <form class="" action="{{route('admin_orders.destroy',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('admin.orders.destroy',['id'=>$order->id])}}"
                                                       method="post">
                                                     @csrf
                                                     <button type="submit" onclick="return confirm('Are you sure?')">
@@ -118,10 +118,10 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <form class="" action="{{route('admin_factors.create',['id'=>$order->id])}}"
+                                                <form class="" action="{{route('admin.factors.create',['id'=>$order->id])}}"
                                                       method="get">
                                                     <button type="submit">
-                                                        <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                        <i class="fas fa-file-invoice nav-icon"></i>
                                                     </button>
                                                 </form>
                                             </td>
