@@ -15,8 +15,9 @@ class BuyerProductController extends Controller
      */
     public function index($id)
     {
+        $role = auth()->user()->role;
         $products = Product::where('category_id', $id)->get();
-        return view('Buyer.products.productsData',['products' => $products]);
+        return view('Buyer.products.productsData',['products' => $products,'role'=>$role]);
     }
 
     /**
@@ -24,8 +25,9 @@ class BuyerProductController extends Controller
      */
     public function show(string $id)
     {
+        $role = auth()->user()->role;
         $product = Product::find($id);
-        return view('Buyer.products.showproduct', ['product' =>$product]);
+        return view('Buyer.products.showproduct', ['product' =>$product,'role'=>$role]);
     }
 
 }

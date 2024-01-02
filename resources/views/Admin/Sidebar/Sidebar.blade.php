@@ -6,7 +6,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="#" class="nav-link user-panel mt-3 pb-3 mb-3 info">
-                        3A پروفایل
+                        پروفایل
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
@@ -52,12 +52,6 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('admin.users.create')}}" class="nav-link">
-                                <i class="fas fa-plus nav-icon"></i>
-                                <p> کاربر جدید</p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a href="{{route('admin.users.index')}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
@@ -105,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('workplace')}}" class="nav-link">
+                            <a href="{{route("$role.workplace")}}" class="nav-link">
                                 <i class="fas fa-list nav-icon"></i>
                                 <p>لیست محصولات</p>
                             </a>

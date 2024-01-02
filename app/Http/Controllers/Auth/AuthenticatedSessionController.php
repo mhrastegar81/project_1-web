@@ -25,11 +25,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            $user_role = auth()->user()->role;
+            $request->session()->regenerate();
+            switch ($user_role) {
+                case 'admin':
+                    return redirect()->route('admin.workplace');
+                    break;
+                case 'seller':
+                    return redirect()->route('seller.workplace');
+                    break;
+                case 'buyer':
+                    return redirect()->route('buyer.workplace');
+                    break;
+                default:
+                    echo "your role was unvalid ";
+            }
+        }
 
-        $request->session()->regenerate();
-
-        return redirect('/workplace');
     }
 
     /**
@@ -43,6 +56,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/guest/login');
+        return redirect('/login');
     }
 }

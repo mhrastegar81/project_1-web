@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Seller
+class UserRolerChecker
 {
     /**
      * Handle an incoming request.
@@ -15,14 +15,7 @@ class Seller
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if(auth()->user()->role == 'seller' && auth()->user()->status == 'defined'){
-
-            return $next($request);
-        }elseif(auth()->user()->role == 'seller' && auth()->user()->status == 'waiting'){
-            return redirect(route('waiting_seller'));
-        }
-        return redirect('/login');
+        if(auth())
+        return $next($request);
     }
-
 }

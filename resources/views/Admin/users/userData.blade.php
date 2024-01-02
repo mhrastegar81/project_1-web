@@ -167,11 +167,7 @@
                                 <tr>
                                     <th>نام کاربری</th>
                                     <th>ایمیل</th>
-                                    <th>نام</th>
-                                    <th>نام خانوادگی</th>
-                                    <th>آدرس</th>
                                     <th>شماره همراه</th>
-                                    <th>کشور</th>
                                     <th>شخصیت</th>
                                     <th>وضعیت تایید</th>
                                     <th>تایید</th>
@@ -185,11 +181,7 @@
                                     <tr>
                                         <td>{{ $user->user_name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->first_name }}</td>
-                                        <td>{{ $user->last_name }}</td>
-                                        <td>{{ $user->address }}</td>
                                         <td>{{ $user->phone_number }}</td>
-                                        <td>{{ $user->country }}</td>
                                         <td>{{ $user->role }}</td>
                                         <td>{{ $user->status }}</td>
 
@@ -198,7 +190,8 @@
                                                 <form action="{{ route('users.accept', ['id' => $user->id]) }}"
                                                     method="post">
                                                     @csrf
-                                                    <button type="submit">
+                                                    <button type="submit" @if($user->status == 'defined') disabled @endif>
+                                                        
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                     </button>
                                                 </form>
@@ -206,10 +199,12 @@
                                         </td>
                                         <td>
                                             @if ($user->role == 'seller')
-                                                <form action="{{ route('users.reject', ['id' => $user->id]) }}">
+                                                <form action="{{ route('users.reject', ['id' => $user->id]) }}"
+                                                    method="post">
                                                     @csrf
-                                                    <button type="submit">
-                                                        <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                    <button type="submit" @if($user->status == 'defined') disabled @endif>
+
+                                                        <i class="fa-regular fa-trash-can"></i>
                                                     </button>
                                                 </form>
                                             @endif

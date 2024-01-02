@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{asset('normalize/normalize.min.css')}}">
 <link rel="stylesheet" href="{{asset('persenalCss/checkbox_radio/style.css')}}">
+<link rel="stylesheet" href="{{asset('normalize/normalize.min.css')}}">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{asset('plugins/font-awesome/css/all.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/font-awesome/js/all.js')}}">

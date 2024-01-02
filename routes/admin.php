@@ -23,7 +23,7 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
     Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
     Route::get('/users{id}', [AdminUserController::class, 'update'])->name('users.update');
-    Route::get('/users/{id}/delete', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::any('/users/{id}/delete', [AdminUserController::class, 'destroy'])->name('users.destroy');
     //AdminProductRoutes
     Route::any('/products/{id}/index', [AdminProductController::class, 'index'])->name('products.index');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
@@ -47,4 +47,4 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::get('/factors/{id}', [AdminFactorController::class, 'update'])->name('factors.update');
     Route::get('/factors/{id}/delete', [AdminFactorController::class, 'destroy'])->name('factors.destroy');
     Route::post('/factors/update_status/{id}', [AdminFactorController::class, 'update_status'])->name('factors.update_status');
-});
+})->name('admin_routes');

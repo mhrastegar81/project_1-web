@@ -149,8 +149,8 @@
                                             <form action="{{route('admin.factors.edit',['id'=>$check->id])}}">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit">
-                                                       @if($check->order->pay_status == 'payed') disabled @endif
+                                                <button type="submit" @if($check->order->pay_status == 'payed') disabled @endif>
+
 
                                                     <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                 </button>

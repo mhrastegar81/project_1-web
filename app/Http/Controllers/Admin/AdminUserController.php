@@ -17,17 +17,12 @@ class AdminUserController extends Controller
         return view('Admin.users.userData', ['users' => $users]);
     }
 
-    public function filter(Request $request)
+    public function filter()
     {
-
-
-
         $users = QueryBuilder::for(User::class)
             ->allowedFilters([
                 AllowedFilter::callback('AgeMin', function(Builder $query, $value){
                     $query->where('age', '>=', (int)$value);
-
-
                 })->ignore(null),
                 AllowedFilter::callback('AgeMax', function($query, $value){
                     $query->where('age', '<=', (int)$value);
@@ -67,18 +62,19 @@ class AdminUserController extends Controller
             'city' => $request->city,
         ]);
 
-        return redirect('/admin/user');
+        return redirect('/admin/users');
     }
 
     public function edit($id)
     {
-        $user = User::where('id', $id)->get->first();
+        $user = User::where('id', $id)->first();
         return view('Admin.users.editUser', ['user' => $user]);
     }
 
     public function update(Request $request, $id)
     {
         User::where('id', $id)->update([
+            'role' => $request->role,
             'user_name' => $request->user_name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -92,12 +88,12 @@ class AdminUserController extends Controller
             'province' => $request->province,
             'city' => $request->city,
         ]);
-        return redirect('/admin/user');
+        return redirect('/admin/users');
     }
 
     public function destroy($id)
     {
         User::where('id', $id)->delete();
-        return redirect('/admin/user');
+        return redirect('/admin/users');
     }
 }

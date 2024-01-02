@@ -45,12 +45,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        if ($user->role == 'seller') {
+            User::where('email', $user->email)->update([
+                'status' => 'waiting',
+            ]);
+        }
+
         event(new Registered($user));
 
-        Auth::login($user);
-        $user->createToken('api_token')->plainTextToken;
         return redirect('/workplace');
     }
-
-    
 }

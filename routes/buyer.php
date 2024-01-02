@@ -32,4 +32,4 @@ Route::middleware(['auth', 'buyer'])->name('buyer.')->prefix('buyer')->group(fun
     Route::any('/factor/{id}', [BuyerFactorController::class, 'update'])->name('factor.update');
     Route::any('/factor/{id}', [BuyerFactorController::class, 'update_status'])->name('factor.update_status');
     Route::post('/factor/{id}/destroy', [BuyerFactorController::class, 'destroy'])->name('factor.destroy');
-});
+})->name('buyer_routes');

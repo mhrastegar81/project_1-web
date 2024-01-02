@@ -32,66 +32,66 @@
         <section class="content">
             <!-- form start -->
             <div class="container-fluid">
-                <form role="form" method="post" action="{{route('admin_users.update',['id' => $users->id])}}">
+                <form role="form" method="post" action="{{route('admin.users.update',['id' => $user->id])}}">
                     @csrf
                     @method('patch')
                     <div class="card-body">
                         <div class="form-group">
                             <label for="email">ایمیل</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                   placeholder="{{$users->email}}" value="{{$users->email}}">
+                                   placeholder="{{$user->email}}" value="{{$user->email}}">
                         </div>
                         <div class="form-group">
                             <label for="first_name">نام</label>
                             <input type="text" class="form-control" id="first_name" name="first_name"
-                                   placeholder="{{$users->first_name}}" value="{{$users->first_name}}">
+                                   placeholder="{{$user->first_name}}" value="{{$user->first_name}}">
                         </div>
                         <div class="form-group">
                             <label for="last_name">نام خانوادگی</label>
                             <input type="text" class="form-control" id="last_name" name="last_name"
-                                   placeholder="{{$users->last_name}}" value="{{$users->last_name}}">
+                                   placeholder="{{$user->last_name}}" value="{{$user->last_name}}">
                         </div>
                         <div class="form-group">
                             <label for="user_name">نام کاربری</label>
                             <input type="text" class="form-control" id="user_name" name="user_name"
-                                   placeholder="{{$users->user_name}}" value="{{$users->user_name}}">
+                                   placeholder="{{$user->user_name}}" value="{{$user->user_name}}">
                         </div>
                         <div class="form-group">
                             <label for="phone_number">شماره همراه</label>
                             <input type="number" class="form-control" id="phone_number" name="phone_number"
-                                   placeholder="{{$users->phone_number}}" value="{{$users->phone_number}}">
+                                   placeholder="{{$user->phone_number}}" value="{{$user->phone_number}}">
                         </div>
 
                         <!-- Add the remaining input fields -->
                         <div class="form-group">
                             <label for="age">سن</label>
                             <input type="number" class="form-control" id="age" name="age"
-                                   placeholder="{{$users->age}}" value="{{$users->age}}">
+                                   placeholder="{{$user->age}}" value="{{$user->age}}">
                         </div>
 
                         <div class="form-group">
                             <label for="gender">جنسیت</label>
                             <select class="form-control" id="gender" name="gender">
-                                <option value="male" @if($users->gender == "male") selected @endif>مرد</option>
-                                <option value="female" @if($users->gender == "female") selected @endif>زن</option>
+                                <option value="male" @if($user->gender == "male") selected @endif>مرد</option>
+                                <option value="female" @if($user->gender == "female") selected @endif>زن</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="postal_code">کد پستی</label>
                             <input type="number" class="form-control" id="postal_code" name="postal_code"
-                                   placeholder="{{$users->post_code}}" value="{{$users->post_code}}">
+                                   placeholder="{{$user->post_code}}" value="{{$user->post_code}}">
                         </div>
 
                         <div class="form-group">
                             <label for="address">آدرس</label>
                             <input type="text" class="form-control" id="address" name="address"
-                                   placeholder="{{$users->address}}" value="{{$users->address}}">
+                                   placeholder="{{$user->address}}" value="{{$user->address}}">
                         </div>
                         <div class="form-group">
                             <label for="country">کشور</label>
                             <input type="country" class="form-control" id="country" name="country"
-                                   placeholder="{{$users->country}}" value="{{$users->country}}">
+                                   placeholder="{{$user->country}}" value="{{$user->country}}">
                         </div>
 
                     </div>
