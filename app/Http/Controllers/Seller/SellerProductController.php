@@ -35,15 +35,14 @@ class SellerProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        dd($request);
+        {
+            dd($request);
         Product::create([
             'user_id' => $request->seller,
             'category_id' => $request->category,
             'title' => $request->title,
             'price' => $request->price,
             'inventory' => $request->inventory,
-            'sold_number' => $request->sold_number,
             'discription' => $request->discription,
             'image_address' => $request->image_address,
             'created_at' => date('Y-m-d H:i:s'),

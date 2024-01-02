@@ -85,7 +85,7 @@
                                     <div class="d1">
 
                                         <a href="{{ route('admin.products.index', ['id' => $category->id]) }}">
-                                            <img width="400px" height="300px" src="{{ URL($category->image_address) }}"
+                                            <img width="400px" height="300px" src="{{ URL("images/$category->image_address") }}"
                                                 class="img">
                                                 <p class="p1">
                                                     {{ $category->name }}

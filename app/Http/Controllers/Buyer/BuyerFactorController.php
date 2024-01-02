@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Buyer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Factor;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class BuyerFactorController extends Controller
@@ -13,7 +14,8 @@ class BuyerFactorController extends Controller
      */
     public function index()
     {
-        $checks = Factor::all();
+        $id = auth()->user()->id;
+        $checks = Factor::where('user_id', $id)->get();
         return view('Buyer.checks.checksData', ['checks' => $checks]);
     }
 
@@ -22,7 +24,8 @@ class BuyerFactorController extends Controller
      */
     public function create()
     {
-        //
+        $orders = Order::all();
+        return view('Buyer.checks.addCheck',['orders' => $orders]);
     }
 
     /**
@@ -31,6 +34,7 @@ class BuyerFactorController extends Controller
     public function store(Request $request)
     {
         Factor::create([
+            'user_id' => $request->user_id,
             'order_id' => $request->order_id,
             'finally_price' => $request->total_pay,
             'created_at'=>date('Y-m-d H:i:s'),
@@ -67,7 +71,8 @@ class BuyerFactorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Order::where('id', $id)->delete();
+        return redirect('/buyer/');
     }
 
     public function update_status($id) {

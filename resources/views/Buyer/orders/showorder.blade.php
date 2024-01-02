@@ -42,7 +42,7 @@
                                 <table id="Data" class="table table-bordered table-striped table table-hover">
 
                                     <thead>
-                                        <img width="400" , height="400" src="{{ $product->image_address }}">
+                                        <img width="400" , height="400" src="{{ URL("images/products/$product->image_address") }}">
 
                                         <tr>
 
@@ -67,7 +67,7 @@
                                                         action="{{ route('buyer.orders.edit', ['id' => $order->id]) }}"
                                                         method="post">
                                                         @csrf
-                                                        <button type="submit" ><i
+                                                        <button type="submit" @if ($order->pay_status == 'payed') disabled @endif><i
                                                             class="fa-regular fa-pen-to-square fa-flip-horizontal"></i></button>
                                                     </form>
                                                 </td>

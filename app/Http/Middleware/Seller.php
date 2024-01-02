@@ -15,8 +15,10 @@ class Seller
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->role == 'seller'){
+        if(auth()->user()->role == 'seller' && auth()->user()->status == 'defined'){
             return $next($request);
+        }elseif(auth()->user()->role == 'seller' && auth()->user()->status == 'waiting'){
+            dd('dear seller thank you for useing our website you registered successfully please wait for accepting from admin');
         }
         return redirect('/login');
     }

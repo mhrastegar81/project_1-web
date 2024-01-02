@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل مدیریت | جدول داده</title>
+    <title>پنل کاربر</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -130,7 +130,6 @@
                             <table id="Data" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>شماره سفارش</th>
                                     <th>مبلغ فاکتور</th>
                                     <th>وضعیت</th>
                                     <th>ویرایش</th>
@@ -141,7 +140,6 @@
                                 <tbody>
                                 @foreach ($checks as $check)
                                     <tr>
-                                        <td>{{ $check->order_id }}</td>
                                         <td>{{ $check->order->total_price }}</td>
                                         <td>{{ $check->order->pay_status}}</td>
                                         <td>
@@ -149,11 +147,12 @@
                                             <form action="{{route('buyer.orders.edit',['id'=>$check->id])}}">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit">
-{{--                                                        @if($check->status == 'پرداخت شده') disabled @endif--}}
+                                                <button type="submit"@if($check->order->pay_status == 'payed') disabled @endif>
+
 
                                                     <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                 </button>
+
 
                                             </form>
 
@@ -182,7 +181,6 @@
 
                                 <tfoot>
                                 <tr>
-                                    <th>شماره سفارش</th>
                                     <th>مبلغ فاکتور</th>
                                     <th>وضعیت</th>
                                     <th>ویرایش</th>

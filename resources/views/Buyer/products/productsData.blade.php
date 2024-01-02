@@ -81,7 +81,7 @@
                                             <tr>
                                                 <td>{{ $product->id }}</td>
                                                 <td><img width="100" height="100"
-                                                        src="{{ $product->image_address }}">
+                                                        src="{{ URL("images/products/$product->image_address") }}">
                                                 </td>
                                                 </td>
                                                 <td>{{ $product->title }}</td>

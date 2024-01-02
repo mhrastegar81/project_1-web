@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل مدیریت | داشبورد اول</title>
+    <title>پنل کاربر</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('Buyer.styleSheets.styleSheets')
@@ -39,12 +39,17 @@
                         <div class="form-group">
                             <label for="order_id">اسم سفارش</label>
                             <select name="order_id" class="form-control" id="order_id" onchange="updateTotalPrice(this)">
-                                <option value="">انتخاب سفارش</option>
+
                                 @foreach($orders as $order)
                                     <option value="{{ $order->id }}" data-total-price="{{ $order->total_price }}">
                                         {{ $order->title }}
                                     </option>
                                 @endforeach
+                            </select>
+                            <select name="user_id"class="form-control" >
+                                <option value="{{ Auth::user()->id }}">
+                                    {{ Auth::user()->user_name }}
+                                </option>
                             </select>
                         </div>
                         <div class="form-group">

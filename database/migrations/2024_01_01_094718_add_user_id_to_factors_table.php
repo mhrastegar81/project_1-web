@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('factors', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
-            $table->bigInteger('order_id')->unsigned()->index();
-            $table->bigInteger('user_id')->unsigned()->index();
-            $table->timestamps();
-            $table->softDeletes();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+        Schema::table('factors', function (Blueprint $table) {
+            $table->bigInteger('user_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
@@ -27,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('factors');
+        Schema::table('factors', function (Blueprint $table) {
+            //
+        });
     }
 };

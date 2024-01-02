@@ -87,11 +87,7 @@
                     <label for="inventory">موجودی</label>
                     <input type="number" class="form-control" id="inventory" name="inventory" placeholder="موجودی">
                 </div>
-                <div class="form-group">
-                    <label for="sold_number">فروش رقته</label>
-                    <input type="number" class="form-control" id="sold_number" name="sold_number"
-                        placeholder="فروش رقته">
-                </div>
+               
                 <div class="form-group">
                     <label for="discription">توضیحات</label>
                     <textarea class="form-control" rows="4" id="discription" name="discription"

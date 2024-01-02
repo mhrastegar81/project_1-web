@@ -5,18 +5,50 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل کاربران</title>
+    <title>پنل ادمین</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     @include('Buyer.styleSheets.dataStyle')
     @include('Buyer.styleSheets.styleSheets')
     <style>
-        #d1 {
+        .d1 {
 
-            padding-right:110px ;
-            padding-left:110px ;
+            position: relative;
+            margin-right: 110px;
+            margin-left: 110px;
             display: inline-block;
+        }
+
+        .img {
+            border-radius: 15px;
+            box-shadow: 7px 5px 15px rgb(31, 31, 31);
+        }
+
+        .d1:hover .p1 {
+            border-radius: 15px;
+            box-shadow: 0 0 5px 0 black;
+            width: 100%;
+            height: 100%;
+            visibility: visible;
+            opacity: 1;
+            text-align: center;
+            color: white;
+            font-size: 25px;
+            backdrop-filter: blur(5px);
+            top: 15px;
+            bottom: 0;
+            right: 15px;
+            left: 0;
+
+        }
+
+        .p1 {
+            padding: 120px;
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+
         }
     </style>
 
@@ -25,7 +57,7 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        @include('Buyer.navbar.navbar')
+        @include('navbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -48,21 +80,27 @@
                             <!-- /.card-header -->
                             <div class="card-body">
 
-                                            @for ($i = 1; $i <= $categories->count(); $i += 1)
-                                                    {{-- {{dd("background-image:url( " . $categories->find($i)->image_address . ");")}} --}}
-                                                    <div id="d1">
-                                                        <a href="{{route('buyer.products.index', ['id' => $i] ) }}">
-                                                            <img width="400px" height="300px"
-                                                                    src="{{ URL($categories->find($i)->image_address) }}" style="border-radius: 30px;">
-                                                        </a>
-                                                        <p style="text-align: center ; color:black">{{ $categories->find($i)->name }}
-                                                        </p>
-                                                    </div>
 
-                                                @if($i % 2 == 0)
-                                                    <br>
-                                                @endif
-                                            @endfor
+                                @foreach ($categories as $category)
+                                    <div class="d1">
+
+                                        <a href="{{ route('buyer.products.index', ['id' => $category->id]) }}">
+                                            <img width="400px" height="300px" src="{{ URL("images/$category->image_address") }}"
+                                                class="img">
+                                                <p class="p1">
+                                                    {{ $category->name }}
+                                                </p>
+                                        </a>
+
+
+
+                                    </div>
+
+                                    @if ($category->id % 2 == 0)
+                                        <br><br><br><br>
+                                    @endif
+                                @endforeach
+
 
                             </div>
                             <!-- /.card-body -->

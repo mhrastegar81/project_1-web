@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable ;
 
     use HasFactory;
     protected $guarded = ['id'];
@@ -26,6 +26,9 @@ class User extends Authenticatable
     }
     public function products(){
         return $this->hasMany(Product::class);
+    }
+    public function factors(){
+        return $this->hasMany(Factor::class);
     }
 
     /**

@@ -48,9 +48,8 @@ class BuyerOrderController extends Controller
         foreach ($request->all() as $key => $product_count) {
 
             if (Str::is('Product*', $key)) {
-
-                $product_id = substr($key, -1);
-                $products = Product::where('id', $product_id)->first();
+                $product_id = explode("_", $key);
+                $products = Product::where('id', $product_id[1])->first();
                 $total_price += $products->price * $product_count;
 
                 $last_order_id = Order::select('id')->get()->max('id');
@@ -59,7 +58,7 @@ class BuyerOrderController extends Controller
                 }
 
                 $order = Order::find($last_order_id);
-                $order->products()->attach($product_id, ['count' => $product_count]);
+                $order->products()->attach($product_id[1], ['count' => $product_count]);
             }
         }
 
@@ -105,19 +104,19 @@ class BuyerOrderController extends Controller
 
             if (Str::is('Product*', $key)) {
 
-                $product_id = substr($key, -1);
+                $product_id = explode("_", $key);
 
 
-                $products = Product::where('id', $product_id)->first();
+                $products = Product::where('id', $product_id[1])->first();
                 $total_price += $products->price * $product_count;
 
                 if ($flage == true) {
 
-                    $order->products()->sync([$product_id => ['count' => $product_count]]);
+                    $order->products()->sync([$product_id[1] => ['count' => $product_count]]);
                     $flage = false;
 
                 } else{
-                    $order->products()->attach($product_id, ['count' => $product_count]);
+                    $order->products()->attach($product_id[1], ['count' => $product_count]);
                 }
 
             }
@@ -139,16 +138,16 @@ class BuyerOrderController extends Controller
     public function destroy(string $id)
     {
         Order::where('id', $id)->delete();
-        return redirect('/buyer');
+        return redirect('/buyer/factor');
     }
 
     public function pay($id){
-        $orders = Order::where('user_id',$id)->get();
-        Order::where('user_id', $id)->update([
+        $orders = Order::where('id',$id)->get();
+        Order::where('id', $id)->update([
             'pay_status' => 'payed',
         ]);
 
         return view('Buyer.checks.addCheck',['orders'=>$orders]);
-    
+
     }
 }

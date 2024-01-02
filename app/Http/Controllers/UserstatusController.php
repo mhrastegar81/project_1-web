@@ -11,15 +11,11 @@ class UserstatusController extends Controller
         $user = User::find($id);
         $user->update(['status' => 'defined ']);
         session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
-        return view('authorize.login');
-    }
-
-    public function acceptReject() {
-        return view('authorize.acceptRole');
+        return view('login');
     }
 
     public function reject($id) {
         User::find($id)->update(['status' => 'rejected'])->delete();
-        return view('authorize.login');
+        return view('login');
     }
 }
