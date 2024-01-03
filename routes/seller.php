@@ -13,7 +13,7 @@ Route::middleware('seller')->prefix('/seller')->group(function () {
     Route::post('/order/{id}/destroy', [SellerOrderController::class, 'destroy'])->name('seller.orders.destroy');
 
     //products
-    Route::get('/products/index/{category_id?}', [SellerProductController::class, 'index'])->name('seller.products.index')->middleware(['auth', 'seller']);
+    Route::get('/products/index/{category_id?}', [SellerProductController::class, 'index'])->name('seller.products.index');
     Route::get('/products/create', [SellerProductController::class, 'create'])->name('seller.products.create');
     Route::any('/products', [SellerProductController::class, 'store'])->name('seller.products.store');
     Route::get('/products/{id}/show', [SellerProductController::class, 'show'])->name('seller.products.show');

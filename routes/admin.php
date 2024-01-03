@@ -25,7 +25,8 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::get('/users{id}', [AdminUserController::class, 'update'])->name('users.update');
     Route::any('/users/{id}/delete', [AdminUserController::class, 'destroy'])->name('users.destroy');
     //AdminProductRoutes
-    Route::any('/products/{id}/index', [AdminProductController::class, 'index'])->name('products.index');
+    Route::any('/products/index/{category_id?}', [AdminProductController::class, 'index'])->name('products.index');
+    Route::get('/products/filter/{category_id?}', [AdminProductController::class, 'filter'])->name('products.filter');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
     Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/show', [AdminProductController::class, 'show'])->name('products.show');
@@ -34,6 +35,7 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::get('/products/{id}/delete', [AdminProductController::class, 'destroy'])->name('products.destroy');
     //AdminOrderRoutes
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/filter/{category_id?}', [AdminOrderController::class, 'filter'])->name('orders.filter');
     Route::any('/orders/create', [AdminOrderController::class, 'create'])->name('orders.create');
     Route::post('/orders', [AdminOrderController::class, 'store'])->name('orders.store');
     Route::get('/orders/{id}/edit', [AdminOrderController::class, 'edit'])->name('orders.edit');

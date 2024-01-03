@@ -17,11 +17,11 @@ class Seller
     {
 
         if(auth()->user()->role == 'seller' && auth()->user()->status == 'defined'){
-
             return $next($request);
         }elseif(auth()->user()->role == 'seller' && auth()->user()->status == 'waiting'){
             return redirect(route('waiting_seller'));
         }
+        
         return redirect('/login');
     }
 

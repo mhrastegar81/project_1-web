@@ -29,7 +29,6 @@
             box-sizing: border-box;
             display: inline;
         }
-
     </style>
 
 </head>
@@ -51,98 +50,154 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
 
-            @include('Admin.header.data.productsData_header')
+            @include('Admin.header.data.ordersData_header')
             <!-- Main content -->
             <section class="content">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+
+                            {{-- filter part start --}}
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="Data" class="table table-bordered table-striped table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>تصویر</th>
-                                            <th>نام کالا</th>
-                                            <th>توضیحات</th>
-                                            <th>قیمت</th>
-                                            <th>موجودی</th>
-                                            <th>مشاهده کالا</th>
-                                            <th>ویرایش</th>
-                                            <th>حذف</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php($temp = 0)
-                                        @foreach ($products as $product)
-                                            <tr>
-                                                <td>{{ $product->id }}</td>
-                                                <td><img width="100" height="100"
-                                                        src="{{ URL("images/products/$product->image_address") }}">
-                                                </td>
-                                                <td>{{ $product->title }}</td>
-                                                <td>{{ $product->description }}</td>
-                                                <td>{{ $product->price }}</td>
-                                                <td>{{ $product->inventory }}</td>
-                                                <td>
+                                <div id="accordionHead">
+                                    <form role="form" method="get" action="{{ route('admin.products.filter', ['category_id' => $category_id]) }}">
+                                        @csrf
+                                        <div class="card">
+                                            <div class="card-header bg-light">
+                                                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#fillters">
+                                                    فیلتر ها
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="fillters" data-bs-parent="#accordionHead">
 
-                                                    <form
-                                                        action="{{ route('admin.products.show', ['id' => $product->id]) }}"
-                                                        method="get">
-                                                        <button type="submit"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-box" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
-                                                            </svg>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form
-                                                        action="{{ route('admin.products.edit', ['id' => $product->id]) }}"
-                                                        method="get">
-                                                        <button type="submit"><i
-                                                                class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form
-                                                        action="{{ route('admin.products.destroy', ['id' => $product->id]) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        <button type="submit"
-                                                            onclick="return confirm('Are you sure?')"><i
-                                                                class="fa-regular fa-trash-can"></i></button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>تصویر</th>
-                                            <th>نام کالا</th>
-                                            <th>توضیحات</th>
-                                            <th>قیمت</th>
-                                            <th>موجودی</th>
-                                            <th>مشاهده کالا</th>
-                                            <th>ویرایش</th>
-                                            <th>حذف</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                                <div class="form-group">
+                                                    <div class="row">
+
+                                                        <div class="col">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label for="filterAge">price</label>
+                                                                    <label for="filterPriceMin" id="filterAge">از</label>
+                                                                    <input type="number" class="form-control"
+                                                                        id="filterPriceMin" name="filter[PriceMin]"
+                                                                        placeholder="از"
+                                                                        @if (isset($_GET['filterPriceMin'])) value="{{ $_GET['filterPriceMin'] }}" @endif>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label for="filterPriceMax">تا</label>
+                                                                    <input type="number" class="form-control"
+                                                                        id="filterPriceMax" name="filter[PriceMax]"
+                                                                        placeholder="تا"
+                                                                        @if (isset($_GET['filterPriceMax'])) value="{{ $_GET['filterPriceMax'] }}" @endif>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-info">فیلتر</button>
+                                            <a href="{{ route('admin.products.index') }}">
+                                                <button type="button" class="btn btn-warning">حذف فیلتر
+                                                    ها</button>
+                                            </a>
+                                        </div>
+                                </div>
                             </div>
-                            <!-- /.card-body -->
+                            </form>
                         </div>
-                        <!-- /.card -->
+                                <table id="Data"class="table table-bordered table-striped table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>تصویر</th>
+                                                    <th>نام کالا</th>
+                                                    <th>توضیحات</th>
+                                                    <th>قیمت</th>
+                                                    <th>موجودی</th>
+                                                    <th>مشاهده کالا</th>
+                                                    <th>ویرایش</th>
+                                                    <th>حذف</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php($temp = 0)
+                                                @foreach ($products as $product)
+                                                    <tr>
+                                                        <td>{{ $product->id }}</td>
+                                                        <td><img width="100" height="100"
+                                                                src="{{ URL("images/products/$product->image_address") }}">
+                                                        </td>
+                                                        <td>{{ $product->title }}</td>
+                                                        <td>{{ $product->description }}</td>
+                                                        <td>{{ $product->price }}</td>
+                                                        <td>{{ $product->inventory }}</td>
+                                                        <td>
+
+                                                            <form
+                                                                action="{{ route('admin.products.show', ['id' => $product->id]) }}"
+                                                                method="get">
+                                                                <button type="submit"><svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16" height="16"
+                                                                        fill="currentColor" class="bi bi-box"
+                                                                        viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                                                                    </svg>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form
+                                                                action="{{ route('admin.products.edit', ['id' => $product->id]) }}"
+                                                                method="get">
+                                                                <button type="submit"><i
+                                                                        class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form
+                                                                action="{{ route('admin.products.destroy', ['id' => $product->id]) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                <button type="submit"onclick="return confirm('Are you sure?')"><i
+                                                                        class="fa-regular fa-trash-can"></i>
+                                                                    </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>تصویر</th>
+                                                    <th>نام کالا</th>
+                                                    <th>توضیحات</th>
+                                                    <th>قیمت</th>
+                                                    <th>موجودی</th>
+                                                    <th>مشاهده کالا</th>
+                                                    <th>ویرایش</th>
+                                                    <th>حذف</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    {{--                            {{ $users->onEachSide(3)->links() }} --}}
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
+                    <!-- /.row -->
             </section>
             <!-- /.content -->
         </div>
@@ -189,8 +244,7 @@
                 "lengthChange": true,
                 "searching": true,
                 "ordering": true,
-                "autoWidth": true,
-                "pageLength": 5
+                "autoWidth": true
             });
         });
     </script>

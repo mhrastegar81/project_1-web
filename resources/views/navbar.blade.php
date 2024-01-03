@@ -5,7 +5,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route("$role.workplace") }}" class="nav-link">خانه</a>
+            <a href="{{ route(auth()->user()->role .".workplace") }}" class="nav-link">خانه</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ route('support') }}" class="nav-link">تماس</a>
@@ -13,7 +13,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3" method="post" action="{{ route("$role.workplace") }}">
+    <form class="form-inline ml-3" method="post" action="{{ route(auth()->user()->role .".workplace") }}">
         @csrf
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="دسته بندی" aria-label="Search"

@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل ادمین</title>
+    <title>فروشگاه</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @include('Buyer.styleSheets.dataStyle')
-    @include('Buyer.styleSheets.styleSheets')
+    @include('Admin.styleSheets.dataStyle')
+    @include('Admin.styleSheets.styleSheets')
     <style>
         .d1 {
 
@@ -63,7 +63,13 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Sidebar -->
-            @include('Buyer.Sidebar.Sidebar')
+            @if ($role == 'admin')
+                @include('Admin.Sidebar.Sidebar')
+            @elseif ($role == 'seller')
+                @include('Seller.Sidebar.Sidebar')
+            @else
+                @include('Buyer.Sidebar.Sidebar')
+            @endif
             <!-- /.sidebar -->
         </aside>
 
@@ -71,7 +77,7 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
 
-            @include('Buyer.header.data.productsData_header')
+            @include('Admin.header.data.productsData_header')
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -83,13 +89,20 @@
 
                                 @foreach ($categories as $category)
                                     <div class="d1">
+                                        <a
+                                            @if ($role == 'admin')
+                                                href="{{ route('admin.products.index', ['category_id' => $category->id]) }}"
+                                            @elseif ($role == 'seller')
+                                                href="{{ route('seller.products.index', ['category_id' => $category->id]) }}"
+                                            @else
+                                                href="{{ route('buyer.products.index', ['category_id' => $category->id]) }}"
+                                            @endif>
 
-                                        <a href="{{ route('buyer.products.index', ['id' => $category->id]) }}">
-                                            <img width="400px" height="300px" src="{{ URL("images/$category->image_address") }}"
-                                                class="img">
-                                                <p class="p1">
-                                                    {{ $category->name }}
-                                                </p>
+                                            <img width="400px" height="300px"
+                                                src="{{ URL("images/$category->image_address") }}" class="img">
+                                            <p class="p1">
+                                                {{ $category->name }}
+                                            </p>
                                         </a>
 
 
@@ -114,7 +127,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        @include('Buyer.footer.main_footer')
+        @include('Admin.footer.main_footer')
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">

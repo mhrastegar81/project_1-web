@@ -3,19 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminProductController extends Controller
 {
     public function index($id) {
         $products = Product::where('category_id', $id)->get();
-        return view('Admin.products.productsData', ['products' => $products]);
+        return view('Admin.products.productsData', ['products' => $products, 'category_id'=> $id]);
     }
 
+    public function filter($category_id)
+    {
+        $products = QueryBuilder::for(Product::class)
+            ->allowedFilters([
+                AllowedFilter::callback('PriceMin', function(Builder $query, $value){
+                    $query->where('price', '>=', (int)$value);
+                })->ignore(null),
+                AllowedFilter::callback('PriceMax', function($query, $value){
+                    $query->where('price', '<=', (int)$value);
+                })->ignore(null),
+
+            ])
+            ->get();
+            return view('Admin.products.productsData', ['products' => $products,'category_id'=>$category_id]);
+    }
     public function create() {
         return view('Admin.products.addProduct');
     }

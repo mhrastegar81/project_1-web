@@ -20,7 +20,7 @@ Route::middleware(['auth', 'buyer'])->name('buyer.')->prefix('buyer')->group(fun
 
 
     //products
-    Route::get('/products/{id}', [BuyerProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{category_id}', [BuyerProductController::class, 'index'])->name('products.index');
     Route::get('/products/{id}/show', [BuyerProductController::class, 'show'])->name('products.show');
 
 

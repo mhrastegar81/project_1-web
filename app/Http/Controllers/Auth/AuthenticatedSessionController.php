@@ -26,20 +26,23 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            $user = auth()->user();
             $user_role = auth()->user()->role;
-            $request->session()->regenerate();
             switch ($user_role) {
                 case 'admin':
+                    session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
                     return redirect()->route('admin.workplace');
                     break;
                 case 'seller':
+                    session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
                     return redirect()->route('seller.workplace');
                     break;
                 case 'buyer':
+                    session()->put('token', $user->createToken("API TOKEN")->plainTextToken);
                     return redirect()->route('buyer.workplace');
                     break;
                 default:
-                    echo "your role was unvalid ";
+                    echo "your role was invalid ";
             }
         }
 
@@ -50,12 +53,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
+        $user = $request->user();
+        $user->tokens->each(function($token , $key){
+            $token->delete();
+            Auth::logout();
+        });
         return redirect('/login');
     }
 }

@@ -35,6 +35,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+
+
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div id="accordionHead">
@@ -191,7 +193,7 @@
                                                     method="post">
                                                     @csrf
                                                     <button type="submit" @if($user->status == 'defined') disabled @endif>
-                                                        
+
                                                         <i class="fa-regular fa-pen-to-square fa-flip-horizontal"></i>
                                                     </button>
                                                 </form>
@@ -230,7 +232,6 @@
                                             </form>
                                         </td>
                                     </tr>
-                                    }
                                 @endforeach
                             </tbody>
                         </table>

@@ -8,22 +8,50 @@ use App\Http\Requests\AdminRequest\StoreAdminOrderRequest;
 use App\Http\Requests\AdminRequest\UpdateAdminOrderRequest;
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedInclude;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminOrderController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $orders = Order::all();
         return view('Admin.orders.ordersData', ['orders' => $orders]);
     }
-    public function create() {
+
+    public function filter()
+    {
+        $orders = QueryBuilder::for(Order::class)
+        ->join('users', 'orders.user_id', '=', 'users.id')
+        ->allowedFilters([
+                AllowedFilter::callback('PriceMin', function(Builder $query, $value){
+                    $query->where('total_price', '>=', (int)$value);
+                })->ignore(null),
+                AllowedFilter::callback('PriceMax', function($query, $value){
+                    $query->where('total_price', '<=', (int)$value);
+                })->ignore(null),
+                AllowedFilter::exact('title')->ignore(null),
+                AllowedFilter::exact('users.email', null , false),
+                AllowedFilter::exact('users.user_name', null , false),
+            ])
+            ->get();
+        return view('Admin.orders.ordersData', ['orders' => $orders]);
+
+    }
+
+    public function create()
+    {
         $users = User::where('role', 'buyer')->get();
         $products_available = Product::all();
-        return view('Admin.orders.addOrder' , ['users' => $users , 'products_available' => $products_available]);
+        return view('Admin.orders.addOrder', ['users' => $users, 'products_available' => $products_available]);
     }
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $total_price = 0;
         Order::create([
             'user_id' => $request->user_id,
@@ -56,17 +84,19 @@ class AdminOrderController extends Controller
 
         return redirect('/admin/orders');
     }
-    public function edit($id) {
-            $order = Order::find($id)->first();
-            $user = User::find($order->user_id)->first();
-            $order_products = $order->products()->where('order_id',$id)->get();
+    public function edit($id)
+    {
+        $order = Order::find($id)->first();
+        $user = User::find($order->user_id)->first();
+        $order_products = $order->products()->where('order_id', $id)->get();
 
-            $products = Product::all();
-            $orders = Order::all();
-            return view('Admin.orders.editOrderMenue',['order_products' => $order_products, 'user' => $user , 'products' => $products , 'orders' => $orders]);
+        $products = Product::all();
+        $orders = Order::all();
+        return view('Admin.orders.editOrderMenue', ['order_products' => $order_products, 'user' => $user, 'products' => $products, 'orders' => $orders]);
     }
 
-    public function update(Request $request , $id) {
+    public function update(Request $request, $id)
+    {
         $total_price = 0;
         $order = Order::find($id);
         $flage = true;
@@ -76,7 +106,7 @@ class AdminOrderController extends Controller
 
                 $product_id = substr($key, -1);
 
-//                $order_products = $order->products()->where(['order_id' => $id, 'product_id' => $product_id])->first();
+                //                $order_products = $order->products()->where(['order_id' => $id, 'product_id' => $product_id])->first();
 
                 $products = Product::where('id', $product_id)->first();
                 $total_price += $products->price * $product_count;
@@ -85,11 +115,9 @@ class AdminOrderController extends Controller
 
                     $order->products()->sync([$product_id => ['count' => $product_count]]);
                     $flage = false;
-
-                } else{
+                } else {
                     $order->products()->attach($product_id, ['count' => $product_count]);
                 }
-
             }
         }
 
@@ -101,7 +129,8 @@ class AdminOrderController extends Controller
         return redirect('/admin/orders');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         Order::find($id)->delete();
         return redirect('/admin/orders');
     }
