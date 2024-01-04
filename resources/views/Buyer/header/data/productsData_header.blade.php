@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1><a href="{{route("$role.workplace")}}">دسته بندی ها</a></h1>
+                <h1><a href="{{ route(auth()->user()->role . '.workplace') }}">دسته بندی ها</a></h1>
             </div>
 
         </div>

@@ -18,7 +18,8 @@ class AdminFactorController extends Controller
 
     public function create() {
         $orders = Order::all();
-        return view('Admin.checks.addCheck',['orders' => $orders]);
+        $factors = Factor::all();
+        return view('Admin.checks.addCheck',['orders' => $orders,'factors'=> $factors]);
     }
     public function store(Request $request) {
         Factor::create([

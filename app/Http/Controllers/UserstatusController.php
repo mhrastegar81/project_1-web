@@ -14,7 +14,8 @@ class UserstatusController extends Controller
     }
 
     public function reject($id) {
-        User::find($id)->update(['status' => 'rejected'])->delete();
+        User::find($id)->update(['status' => 'undefined']);
+        User::find($id)->delete();
         return redirect()->back();
     }
 }

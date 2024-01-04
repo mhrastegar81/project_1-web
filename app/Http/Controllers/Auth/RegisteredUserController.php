@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -28,16 +29,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterRequest $request): RedirectResponse
     {
-
-        // $request->validate([
-
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-        //     'password' => ['required'],
-        // ]);
-
         $user = User::create([
             'role' => $request->role,
             'user_name' => $request->user_name,
@@ -50,8 +43,6 @@ class RegisteredUserController extends Controller
                 'status' => 'waiting',
             ]);
         }
-
-        event(new Registered($user));
 
         return redirect('/login');
     }
